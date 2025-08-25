@@ -1,6 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react"
 
-import { LoginForm } from "@/components/login-form"
+import { SignUpForm } from "@/components/signup-form"
 
 export default function LoginPage() {
   return (
@@ -15,7 +15,7 @@ export default function LoginPage() {
 
         {/* Login Form */}
         <div className="w-full max-w-xs">
-          <LoginForm />
+          <SignUpForm />
         </div>
       </div>
       <div className="bg-muted relative hidden lg:block">
