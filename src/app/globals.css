@@ -69,8 +69,9 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
+  --sidebar: oklch(0% 0 0);
+  --sidebar-inset-background-image: url("/texture.png");
+  --sidebar-foreground: oklch(100% 0.00011 271.152);
   --sidebar-primary: oklch(0.637 0.237 25.331);
   --sidebar-primary-foreground: oklch(0.971 0.013 17.38);
   --sidebar-accent: oklch(0.967 0.001 286.375);
@@ -104,6 +105,7 @@
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.21 0.006 285.885);
+  --sidebar-inset-background-image: url("/texture.png");
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.637 0.237 25.331);
   --sidebar-primary-foreground: oklch(0.971 0.013 17.38);
@@ -113,6 +115,11 @@
   --sidebar-ring: oklch(0.637 0.237 25.331);
 }
 
+.bg-sidebar-texture {
+  background-image: var(--sidebar-inset-background-image);
+  background-size: cover; /* adjust as needed */
+  background-repeat: no-repeat; /* adjust as needed */
+}
 
 @layer base {
   * {
