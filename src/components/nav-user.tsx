@@ -8,6 +8,8 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react"
+import { User as UserIcon } from "lucide-react" // 👈 import a default icon
+
 
 import {
   Avatar,
@@ -50,10 +52,13 @@ export function NavUser({
               // Expanded: Avatar + name + email
               <SidebarMenuButton className="bg-accent h-20 px-4 py-3 rounded-xl hover:bg-accent/80 transition-colors mt-5 mb-2">
                 <Avatar className="h-10 w-10 rounded-lg bg-white">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg text-black">
-                    {user.name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
+                  {user.avatar ? (
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                  ) : (
+                    <AvatarFallback className="rounded-lg text-black flex items-center justify-center">
+                      <UserIcon className="h-5 w-5" /> {/* 👈 Lucide icon as default */}
+                    </AvatarFallback>
+                  )}
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
@@ -65,11 +70,15 @@ export function NavUser({
               // Collapsed: Only avatar (centered)
               <SidebarMenuButton className="bg-accent h-12 w-12 rounded-full flex items-center justify-center hover:bg-accent/80 transition-colors mt-5 mb-2">
                 <Avatar className="h-8 w-8 rounded-full bg-white">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-full text-black">
-                    {user.name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
+                  {user.avatar ? (
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                  ) : (
+                    <AvatarFallback className="rounded-full text-black flex items-center justify-center">
+                      <UserIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  )}
                 </Avatar>
+
               </SidebarMenuButton>
             )}
           </DropdownMenuTrigger>
@@ -83,12 +92,16 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-3 font-normal">
               <div className="flex items-center gap-3 text-sm">
-                <Avatar className="h-10 w-10 rounded-lg bg-white">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg text-black">
-                    {user.name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
+                <Avatar className="h-8 w-8 rounded-full bg-white">
+                  {user.avatar ? (
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                  ) : (
+                    <AvatarFallback className="rounded-full text-black flex items-center justify-center">
+                      <UserIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  )}
                 </Avatar>
+
                 <div className="grid flex-1 text-left leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="truncate text-xs text-gray-400">{user.email}</span>

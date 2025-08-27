@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { X } from "lucide-react"
+import { X, Bookmark } from "lucide-react"
 import Image from "next/image"
 import { NavUser } from "@/components/nav-user"
 import {
@@ -15,9 +15,9 @@ import {
 import { CommunityHeader } from "./sidebar-community-header"
 
 const communityItems = [
-  { title: "Popular Legends", subtitle: "Explore", icon: X },
-  { title: "Extraordinary", subtitle: "Explore", icon: X },
-  { title: "Scary Entities", subtitle: "Explore", icon: X },
+  { title: "Popular Legends", subtitle: "Explore", image: "/icons/popular.png" },
+  { title: "Extraordinary", subtitle: "Explore", image: "/icons/thrilling.png" },
+  { title: "Scary Entities", subtitle: "Explore", image: "/icons/scary.png" },
 ]
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
@@ -31,20 +31,20 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       collapsible="icon"
     >
       {/* Header */}
-      <SidebarHeader className="py-4 flex flex-row items-center gap-3">
-        <Image
+      <SidebarHeader className="py-4 flex flex-row items-center">
+        {/* <Image
           src="/home_logo.png"
           alt="Logo"
           width={80}
           height={80}
           className="object-contain shrink-0"
           priority
-        />
-        {state === "expanded" && (
-          <h1 className="text-xl font-bold text-primary uppercase font-lato whitespace-nowrap">
+        /> */}
+        {/* {state === "expanded" && (
+          <h1 className="text-xl font-bold text-primary uppercase font-lato whitespace-nowrap my-auto">
             BAKHABAZAR
           </h1>
-        )}
+        )} */}
       </SidebarHeader>
 
 
@@ -60,21 +60,26 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
                 key={i}
                 className="flex items-center gap-3 px-2 py-2 cursor-pointer rounded-md transition-colors hover:bg-neutral-700"
               >
-                <div className="w-10 h-10 bg-white flex items-center justify-center">
-                  <item.icon className="h-4 w-4 text-black" />
+                <div className="w-10 h-10 rounded-md overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
 
                 {state === "expanded" && (
                   <div className="flex flex-col">
                     <span className="text-sm font-medium">{item.title}</span>
-                    <span className="text-xs text-gray-400">
-                      {item.subtitle}
-                    </span>
+                    <span className="text-xs text-gray-400">{item.subtitle}</span>
                   </div>
                 )}
               </li>
             ))}
           </ul>
+
 
           {/* Bookmarks Section */}
           <div
@@ -84,11 +89,15 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
             {state === "expanded" && (
               <h2 className="text-sm font-medium mb-2 px-2">Your Bookmarks</h2>
             )}
+
             <div
               className={`flex items-center gap-3 cursor-pointer rounded-lg transition-colors hover:bg-neutral-700
-    ${state === "collapsed" ? "justify-center" : "px-2 py-2"}`}
+      ${state === "collapsed" ? "justify-center" : "px-2 py-2"}`}
             >
-              <div className="w-10 h-10 bg-white rounded-lg" />
+              <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg">
+                <Bookmark className="w-5 h-5 text-black" />
+              </div>
+
               {state === "expanded" && (
                 <span className="text-sm font-medium">Personal</span>
               )}
