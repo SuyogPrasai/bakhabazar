@@ -2,8 +2,8 @@
 "use client"
 
 import * as React from "react"
-import { X } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
+import { Plus, X } from "lucide-react"
+import Image from "next/image"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -11,12 +11,12 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar"
+import { CommunityHeader } from "./sidebar-community-header"
 
 const communityItems = [
   { title: "Popular Legends", subtitle: "Explore", icon: X },
   { title: "Extraordinary", subtitle: "Explore", icon: X },
   { title: "Scary Entities", subtitle: "Explore", icon: X },
-  { title: "Inspiring Stories", subtitle: "Explore", icon: X },
 ]
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
@@ -25,20 +25,36 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       {...props}
       className="text-white transition-all duration-300 pl-5"
       variant="inset"
+      collapsible="icon"
     >
       {/* Header */}
-      <SidebarHeader className="px-4 py-4 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-primary uppercase font-lato pt-7">
+      <SidebarHeader className="py-4 flex flex-row items-center">
+        {/* Logo */}
+        <Image
+          src="/home_logo.png"
+          alt="Logo"
+          width={80}
+          height={80}
+          className="object-contain"
+          priority
+        />
+
+        {/* Title */}
+        <h1 className="text-2xl font-bold text-primary uppercase font-lato pt-4 ">
           BAKHABAZAR
         </h1>
       </SidebarHeader>
 
+
       {/* Content */}
-      <SidebarContent className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+      <SidebarContent className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+      >
         {/* Community Section */}
         <div className="px-2 bg-accent py-5 rounded-xl flex flex-col">
           <div className="upper_section">
-            <h2 className="text-sm font-medium mb-2 px-2">Community</h2>
+            <CommunityHeader />
+
+
             <ul className="space-y-2">
               {communityItems.map((item, i) => (
                 <li
@@ -74,7 +90,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       {/* Footer */}
-      <SidebarFooter className="border-t border-gray-700">
+      <SidebarFooter className="">
         <NavUser
           user={{
             name: "Suyog Prasai",
