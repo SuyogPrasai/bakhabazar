@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import HomeNav from "@/components/home-nav"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,10 +23,7 @@ export default function Home() {
     >
       <AppSidebar className="py-5 bg-black" />
       <SidebarInset className="bg-background">
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-          </div>
-        </header>
+        <HomeNav />
       </SidebarInset>
     </SidebarProvider>
   )

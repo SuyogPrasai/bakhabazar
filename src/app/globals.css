@@ -43,6 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --font-bebas-neue: var(--font-bebas-neue);
   --color-highlight: var(--highlight);
+  --color-highlight-light: var(--highlight-light);
 }
 
 :root {
@@ -79,6 +80,7 @@
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(100% 0.00011 271.152);
   --highlight: #404040;
+  --highlight-light: #858585;
 }
 
 .dark {
