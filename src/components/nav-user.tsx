@@ -27,6 +27,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
 
 export function NavUser({
@@ -38,26 +39,42 @@ export function NavUser({
     avatar: string
   }
 }) {
+  const { state } = useSidebar()
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton className="bg-accent h-20 px-4 py-3 rounded-xl hover:bg-accent/80 transition-colors mt-5 mb-2">
-              <Avatar className="h-10 w-10 rounded-lg bg-white">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg text-black">
-                  {user.name.charAt(0).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs text-gray-400">{user.email}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4 text-gray-400" />
-            </SidebarMenuButton>
+            {state === "expanded" ? (
+              // Expanded: Avatar + name + email
+              <SidebarMenuButton className="bg-accent h-20 px-4 py-3 rounded-xl hover:bg-accent/80 transition-colors mt-5 mb-2">
+                <Avatar className="h-10 w-10 rounded-lg bg-white">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="rounded-lg text-black">
+                    {user.name.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate text-xs text-gray-400">{user.email}</span>
+                </div>
+                <ChevronsUpDown className="ml-auto size-4 text-gray-400" />
+              </SidebarMenuButton>
+            ) : (
+              // Collapsed: Only avatar (centered)
+              <SidebarMenuButton className="bg-accent h-12 w-12 rounded-full flex items-center justify-center hover:bg-accent/80 transition-colors mt-5 mb-2">
+                <Avatar className="h-8 w-8 rounded-full bg-white">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="rounded-full text-black">
+                    {user.name.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </SidebarMenuButton>
+            )}
           </DropdownMenuTrigger>
 
+          {/* Dropdown (same for both states) */}
           <DropdownMenuContent
             className="min-w-56 rounded-xl border border-gray-800 bg-accent shadow-lg"
             side="right"
