@@ -4,7 +4,7 @@ import { LoginForm } from "@/components/login-form"
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
+    <div className="grid min-h-svh lg:grid-cols-2 bg-white">
       <div className="flex flex-1 flex-col items-center justify-center space-y-8">
         {/* Netflix Logo */}
         <div className="text-center">
