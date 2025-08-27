@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <SidebarProvider
       className="min-h-screen w-full p-3 bg-black"
-    // defaultOpen={false}
+      defaultOpen={false}
     >
       <AppSidebar className="py-5 bg-black" />
       <SidebarInset className="bg-background">
