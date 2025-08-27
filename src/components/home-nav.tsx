@@ -20,7 +20,7 @@ function HomeNav() {
           <input
             type="text"
             placeholder="Search"
-            className="bg-transparent outline-none text-sm text-white w-full placeholder-highlight-light"
+            className="bg-transparent outline-none text-sm text-white w-full placeholder-highlight-light" 
           />
         </div>
       </div>
