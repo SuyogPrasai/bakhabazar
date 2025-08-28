@@ -65,7 +65,7 @@ function SpotlightSlider() {
   }, []);
 
   return (
-    <div className="relative text-white rounded-b-md min-h-[400px] overflow-hidden">
+    <div className="relative text-white min-h-[400px] overflow-hidden">
       {/* Background Image Animation */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
@@ -117,7 +117,7 @@ function SpotlightSlider() {
 
             {/* Button */}
             <button className="flex items-center gap-2 bg-white text-black font-semibold px-4 py-2 rounded-full hover:bg-gray-200">
-              <PlayCircle className="w-5 h-5" /> Watch Now
+              <PlayCircle className="w-5 h-5" /> Listen Now
             </button>
           </motion.div>
         </AnimatePresence>

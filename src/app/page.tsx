@@ -2,6 +2,7 @@ import { AppSidebar } from "@/components/app-sidebar"
 import HomeNav from "@/components/home-nav"
 import SpotlightSlider from "@/components/image-slider"
 import PlayBar from "@/components/play-bar"
+import Trending from "@/components/trending"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,6 +31,7 @@ export default function Home() {
         {/* Scrollable content */}
         <div className="flex flex-col overflow-y-auto custom-scroll">
           <SpotlightSlider />
+          <Trending />
           <div className="min-h-screen"></div>
           {/* more scrollable stuff here */}
         </div>

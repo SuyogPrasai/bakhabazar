@@ -158,6 +158,20 @@
   .custom-scroll::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.4);
   }
+  .custom-scroll-horizontal::-webkit-scrollbar {
+  height: 8px; /* horizontal scrollbar thickness */
+  }
+  .custom-scroll-horizontal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scroll-horizontal::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    
+  }
+  .custom-scroll-horizontal::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 
 }
 

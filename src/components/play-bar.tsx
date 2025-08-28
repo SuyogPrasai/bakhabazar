@@ -17,7 +17,7 @@ import { LucidePlay } from "lucide-react";
 
 function PlayBar() {
   return (
-    <div className="flex items-center justify-between px-4 py-4 bg-[#1a1a1a] text-white w-full absolute bottom-0 rounded-b-xl">
+    <div className="flex items-center justify-between px-4 py-4 bg-[#1a1a1a] text-white w-full absolute bottom-0 rounded-b-xl z-10000">
       {/* Left Section - Song Info */}
       <div className="flex items-center gap-3 min-w-0">
         <Image
