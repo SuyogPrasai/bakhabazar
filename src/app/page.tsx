@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import HomeNav from "@/components/home-nav"
+import SpotlightSlider from "@/components/image-slider"
 import PlayBar from "@/components/play-bar"
 import {
   Breadcrumb,
@@ -25,6 +26,7 @@ export default function Home() {
       <AppSidebar className="py-5 bg-black" />
       <SidebarInset className="bg-background">
         <HomeNav />
+        <SpotlightSlider />
         <PlayBar />
       </SidebarInset>
     </SidebarProvider>
