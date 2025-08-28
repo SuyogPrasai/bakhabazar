@@ -21,7 +21,7 @@ const spotlightData = [
     description:
       "The Bigfoot, a towering mystery of forests, inspires legends. Hidden in shadows, it roams silently, leaving giant footprints and endless questions about nature's greatest untold secret.",
     image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+      "/spotlight/1.jpg",
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const spotlightData = [
     description:
       "Dive deep into the mysteries of the ocean, uncovering creatures and phenomena that remain hidden beneath the waves.",
     image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+      "/spotlight/2.jpg",
   },
 ];
 

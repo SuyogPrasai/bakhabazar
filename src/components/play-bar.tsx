@@ -11,6 +11,9 @@ import {
   Maximize,
   AlignJustify,
 } from "lucide-react";
+import { VolumeSlider } from "./volume-slider";
+import { AudiobookProgress } from "./audio-progress";
+import { LucidePlay } from "lucide-react";
 
 function PlayBar() {
   return (
@@ -41,28 +44,20 @@ function PlayBar() {
           <Shuffle className="h-5 w-5 text-highlight-light hover:text-highlight-light cursor-pointer" />
           <SkipBack className="h-6 w-6 text-highlight-light hover:text-highlight-light cursor-pointer" />
           <button className="flex cursor-pointer items-center justify-center w-10 h-10 rounded-full bg-highlight-light text-black hover:scale-105 transition">
-            <Play className="h-6 w-6" />
+            <LucidePlay className="h-5 w-5" />
           </button>
           <SkipForward className="h-6 w-6 text-highlight-light hover:text-highlight-light cursor-pointer" />
         </div>
 
         {/* Progress Bar */}
-        <div className="flex items-center gap-2 w-full">
-          <span className="text-xs text-highlight-light">0:01</span>
-          <div className="relative w-full h-1 bg-[#2a2a2a] rounded-full">
-            <div className="absolute left-0 top-0 h-1 bg-highlight-light rounded-full w-1/4"></div>
-          </div>
-          <span className="text-xs text-highlight-light">3:34</span>
-        </div>
+        <AudiobookProgress />
       </div>
 
       {/* Right Section - Extra Controls */}
       <div className="flex items-center gap-4">
         <AlignJustify className="h-5 w-5 text-highlight-light hover:text-highlight-light cursor-pointer" />
         <Volume2 className="h-5 w-5 text-highlight-light hover:text-highlight-light cursor-pointer" />
-        <div className="w-24 h-1 bg-[#2a2a2a] rounded-full">
-          <div className="h-1 bg-highlight-light w-3/4 rounded-full"></div>
-        </div>
+        <VolumeSlider />
         <Maximize className="h-5 w-5 text-highlight-light hover:text-highlight-light cursor-pointer" />
       </div>
     </div>

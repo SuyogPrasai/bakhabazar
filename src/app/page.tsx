@@ -19,15 +19,25 @@ import {
 
 export default function Home() {
   return (
-    <SidebarProvider
-      className="min-h-screen w-full p-3 bg-black"
-      defaultOpen={false}
+    <SidebarProvider className="h-screen w-full bg-black overflow-hidden p-2" 
+    // defaultOpen={false}
     >
       <AppSidebar className="py-5 bg-black" />
-      <SidebarInset className="bg-background">
+      <SidebarInset className="bg-background flex flex-col h-[95vh]">
+        {/* Navbar fixed at top */}
         <HomeNav />
-        <SpotlightSlider />
-        <PlayBar />
+
+        {/* Scrollable content */}
+        <div className="flex flex-col overflow-y-auto custom-scroll">
+          <SpotlightSlider />
+          <div className="min-h-screen"></div>
+          {/* more scrollable stuff here */}
+        </div>
+
+        {/* Fixed Playbar at bottom */}
+        <div className="shrink-0">
+          <PlayBar />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   )
