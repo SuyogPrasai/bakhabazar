@@ -28,7 +28,7 @@ export function LoginForm({
 
               {/* Email */}
               <div className="grid gap-3">
-                <Label htmlFor="email" className="text-secondary/80">
+                <Label htmlFor="email" className="text-secondary">
                   Email
                 </Label>
                 <Input
@@ -43,7 +43,7 @@ export function LoginForm({
               {/* Password */}
               <div className="grid gap-3">
                 <div className="flex items-center">
-                  <Label htmlFor="password" className="text-secondary/80">
+                  <Label htmlFor="password" className="text-secondary">
                     Password
                   </Label>
                   <a
@@ -64,7 +64,7 @@ export function LoginForm({
               {/* Login Button */}
               <Button
                 type="submit"
-                className="w-full cursor-pointer bg-secondary text-background hover:bg-secondary/80"
+                className="w-full cursor-pointer bg-primary text-secondary font-bold hover:bg-primary/80 "
               >
                 Login
               </Button>

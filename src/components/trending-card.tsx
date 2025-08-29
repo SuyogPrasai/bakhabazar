@@ -16,12 +16,12 @@ export function RankCard({ rank, title, imageUrl }: RankCardProps) {
       </div>
 
       {/* Image Section */}
-      <div className="w-full h-full bg-white rounded-xl overflow-hidden">
-        <img
+      <div className="w-full h-full bg-highlight rounded-xl overflow-hidden">
+        {/* <img
           src={imageUrl}
           alt={title}
           className="w-full h-full object-cover"
-        />
+        /> */}
       </div>
     </div>
   );
