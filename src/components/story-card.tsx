@@ -1,24 +1,39 @@
-import React from "react";
-import { Play } from "lucide-react"; // using lucide-react for icons
+import React, { useEffect, useState } from "react";
+import { Play } from "lucide-react"; // play button icon
 
-function SongCard() {
+export default function SongCard() {
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    // Fetch a random image from Picsum
+    const randomImage = `https://picsum.photos/300?random=${Math.floor(
+      Math.random() * 1000
+    )}`;
+    setImage(randomImage);
+  }, []);
+
   return (
-    <div className="w-50 cursor-pointer p-3 rounded-md hover:bg-highlight transition group">
-      {/* Image placeholder */}
-      <div className="relative w-44 h-44 bg-light-background-dark rounded-md overflow-hidden">
-        {/* Play button (appears on hover) */}
-        <button className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-green-500 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+    <div className="flex-shrink-0 w-30 sm:w-38 md:w-46 cursor-pointer p-3 rounded-md hover:bg-highlight transition group">
+      {/* Image */}
+      <div className="relative aspect-square w-full bg-light-background-dark rounded-md overflow-hidden">
+        {image && (
+          <img
+            src={image}
+            alt="Random Album Art"
+            className="w-full h-full object-cover"
+          />
+        )}
+
+        <button className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-secondary flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
           <Play className="text-black fill-black" size={20} />
         </button>
       </div>
 
-      {/* Song title */}
-      <p className="mt-3 text-white font-medium text-sm truncate">Papercuts</p>
-
-      {/* Artist name */}
-      <p className="text-gray-400 text-xs truncate">Linkin Park</p>
+      {/* Song Info (dummy for now) */}
+      <p className="mt-3 text-white font-medium text-sm truncate">
+        Random Song
+      </p>
+      <p className="text-gray-400 text-xs truncate">Random Artist</p>
     </div>
   );
 }
-
-export default SongCard;

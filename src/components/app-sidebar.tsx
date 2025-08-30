@@ -32,19 +32,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
     >
       {/* Header */}
       <SidebarHeader className="py-4 flex flex-row items-center">
-        {/* <Image
-          src="/home_logo.png"
-          alt="Logo"
-          width={80}
-          height={80}
-          className="object-contain shrink-0"
-          priority
-        /> */}
-        {/* {state === "expanded" && (
-          <h1 className="text-xl font-bold text-primary uppercase font-lato whitespace-nowrap my-auto">
-            BAKHABAZAR
-          </h1>
-        )} */}
+
       </SidebarHeader>
 
 
