@@ -32,7 +32,7 @@ const Trending = () => {
         <div className="relative w-full flex flex-start h-full ">
           <div
             ref={scrollRef}
-            className="absolute flex gap-4 max-w-[95%] overflow-x-auto max-h-[300px] custom-scroll-horizontal pb-5"
+            className="absolute flex gap-4 max-w-[95%] overflow-x-auto max-h-[300px] no-scroll pb-5"
           >
             {items.map((item, i) => (
               <RankCard

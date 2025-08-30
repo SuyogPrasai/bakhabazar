@@ -14,19 +14,14 @@ import {
 import { VolumeSlider } from "./volume-slider";
 import { AudiobookProgress } from "./audio-progress";
 import { LucidePlay } from "lucide-react";
+import ScrollImage from "./playbar-song-art-button";
 
 function PlayBar() {
   return (
     <div className="flex items-center justify-between px-4 py-4 bg-[#1a1a1a] text-white w-full absolute bottom-0 rounded-b-xl z-20">
       {/* Left Section - Song Info */}
       <div className="flex items-center gap-3 min-w-0">
-        <Image
-          src="/icons/thrilling.png"
-          alt="Album Art"
-          width={48}
-          height={48}
-          className="rounded-md shrink-0"
-        />
+        <ScrollImage />
         <div className="flex flex-col min-w-0">
           <span className="text-sm font-semibold text-highlight-light truncate max-w-[160px]">
             Another One Bites The Dust With A Very Very Long Title
