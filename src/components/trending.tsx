@@ -11,7 +11,7 @@ const Trending = () => {
   const items = Array.from({ length: 10 }, (_, i) => ({
     rank: (i + 1).toString().padStart(2, "0"),
     title: `The Story of Big Foot ${i + 1}`,
-    imageUrl: ``,
+    imageUrl: `https://picsum.photos/200/250?random=${i}`,
   }));
 
   const scroll = (direction: "left" | "right") => {
@@ -24,7 +24,7 @@ const Trending = () => {
   };
 
   return (
-    <div className="text-white p-10 rounded-lg w-full relative flex flex-col h-[300px] mb-10">
+    <div className="text-white p-6 rounded-lg w-full relative flex flex-col h-[300px]">
       <h2 className="text-xl font-semibold mb-4">Trending</h2>
 
       {/* Scrollable area with arrows absolutely inside */}
@@ -32,7 +32,7 @@ const Trending = () => {
         <div className="relative w-full flex flex-start h-full ">
           <div
             ref={scrollRef}
-            className="absolute flex gap-4 max-w-[95%] overflow-x-auto max-h-[300px] no-scroll pb-5"
+            className="absolute flex gap-4 max-w-[95%] overflow-x-auto max-h-[300px] custom-scroll-horizontal pb-5"
           >
             {items.map((item, i) => (
               <RankCard

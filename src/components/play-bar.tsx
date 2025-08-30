@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   Play,
   SkipBack,
@@ -21,15 +20,13 @@ function PlayBar() {
     <div className="flex items-center justify-between px-4 py-4 bg-[#1a1a1a] text-white w-full absolute bottom-0 rounded-b-xl z-20">
       {/* Left Section - Song Info */}
       <div className="flex items-center gap-3 min-w-0">
-        <Link href="#home-top" scroll={true}>
-          <Image
-            src="/icons/thrilling.png"
-            alt="Album Art"
-            width={48}
-            height={48}
-            className="rounded-md shrink-0 cursor-pointer"
-          />
-        </Link>
+        <Image
+          src="/icons/thrilling.png"
+          alt="Album Art"
+          width={48}
+          height={48}
+          className="rounded-md shrink-0"
+        />
         <div className="flex flex-col min-w-0">
           <span className="text-sm font-semibold text-highlight-light truncate max-w-[160px]">
             Another One Bites The Dust With A Very Very Long Title

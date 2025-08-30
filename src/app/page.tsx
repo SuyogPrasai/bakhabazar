@@ -1,6 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import HomeNav from "@/components/home-nav"
-import HomeTop from "@/components/home-top"
 import SpotlightSlider from "@/components/image-slider"
 import PlayBar from "@/components/play-bar"
 import Trending from "@/components/trending"
@@ -21,26 +20,18 @@ import {
 
 export default function Home() {
   return (
-    <SidebarProvider className="h-screen w-full bg-black overflow-hidden p-2 flex" 
+    <SidebarProvider className="h-screen w-full bg-black overflow-hidden p-2" 
     // defaultOpen={false}
     >
       <AppSidebar className="py-5 bg-black" />
-      <SidebarInset className="bg-background h-[95vh] flex-1">
+      <SidebarInset className="bg-background flex flex-col h-[95vh]">
         {/* Navbar fixed at top */}
         <HomeNav />
 
         {/* Scrollable content */}
         <div className="flex flex-col overflow-y-auto custom-scroll">
           <SpotlightSlider />
-          {/* <Trending /> */}
-          <div className="flex gap-3 px-3 py-5" >
-              <div className="home_main w-full" id="home-top">
-                  <HomeTop />
-              </div>
-              <div className="musicbar">
-
-              </div>
-          </div>
+          <Trending />
           <div className="min-h-screen"></div>
           {/* more scrollable stuff here */}
         </div>
