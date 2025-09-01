@@ -4,7 +4,7 @@ import Stories from './story-row'
 
 function HomeMain() {
     return (
-        <div className='p-4 flex flex-col gap-4'>
+        <div className='px-4 md:p-4 flex flex-col gap-4'>
             <div className="heading" >
                 <div className="flex gap-2">
                     <button className="cursor-pointer px-4 py-1 rounded-full bg-white text-black font-medium">

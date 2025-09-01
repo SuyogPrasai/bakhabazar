@@ -8,7 +8,7 @@ const Stories = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // Demo data
-    const stories = Array.from({ length: 5 }, (_, i) => ({
+    const stories = Array.from({ length: 10 }, (_, i) => ({
         id: i,
         title: `Story ${i + 1}`,
         imageUrl: "",
