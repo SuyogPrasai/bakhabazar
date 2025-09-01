@@ -30,7 +30,6 @@ export default function Home() {
 
         {/* Scrollable content */}
         <div className="flex flex-col overflow-y-auto no-scroll gap-6">
-          <SpotlightSlider />
 
           {/* Responsive main + spotlight layout */}
           <div
@@ -43,7 +42,8 @@ export default function Home() {
                 <HomeMain />
               </div>
 
-              <TopComments />
+              <SpotlightSlider />
+              {/* <TopComments /> */}
               <div className=" rounded-xs">
                 <HomeMain />
               </div>
@@ -52,24 +52,24 @@ export default function Home() {
 
             {/* Right column (spotlight) */}
             <div className="lg:col-span-1 min-w-[280px] lg:sticky lg:top-4 self-start">
-                <StorySpotlight
-                  title="The Legend of the Lakhe"
-                  description="In the streets of Kathmandu, the Lakhe dances fiercely, guarding traditions and warding off evil spirits."
-                  entities={[
-                    {
-                      name: "Lakhe",
-                      description:
-                        "A mythical demon-like being in Nepali folklore, known for its fierce dance during festivals and role as a protector against evil spirits.",
-                      views: 12450,
-                    },
-                    {
-                      name: "Kathmandu",
-                      description:
-                        "The capital city of Nepal, known for its vibrant culture, festivals, and deep connection to ancient traditions and myths.",
-                      views: 9320,
-                    },
-                  ]}
-                />
+              <StorySpotlight
+                title="The Legend of the Lakhe"
+                description="In the streets of Kathmandu, the Lakhe dances fiercely, guarding traditions and warding off evil spirits."
+                entities={[
+                  {
+                    name: "Lakhe",
+                    description:
+                      "A mythical demon-like being in Nepali folklore, known for its fierce dance during festivals and role as a protector against evil spirits.",
+                    views: 12450,
+                  },
+                  {
+                    name: "Kathmandu",
+                    description:
+                      "The capital city of Nepal, known for its vibrant culture, festivals, and deep connection to ancient traditions and myths.",
+                    views: 9320,
+                  },
+                ]}
+              />
             </div>
 
           </div>

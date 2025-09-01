@@ -65,7 +65,7 @@ function SpotlightSlider() {
   }, []);
 
   return (
-    <div className="relative text-white min-h-[400px] overflow-hidden">
+    <div className="relative text-white min-h-[400px] overflow-hidden ml-4">
       {/* Background Image Animation */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
