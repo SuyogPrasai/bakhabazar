@@ -53,37 +53,8 @@ export default function DetailStep({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full max-w-sm flex-col gap-6 text-left"
+      className="flex w-full max-w-sm flex-col gap-6 text-left mx-auto"
     >
-      {/* Progress Bar */}
-      <div className="w-full h-[3px] bg-highlight rounded-full">
-        <div
-          className="h-[3px] bg-primary rounded-full"
-          style={{ width: `${((stepIndex) / totalSteps) * 100}%` }}
-        />
-      </div>
-
-      {/* Back + Step + Title */}
-      <div className="flex gap-3">
-        {onBack && (
-          <button
-            type="button"
-            onClick={onBack}
-            className="text-secondary hover:text-primary"
-          >
-            <ChevronLeft className="h-8 w-8 text-highlight-semilight hover:text-highlight-light cursor-pointer" />
-          </button>
-        )}
-        <div className="flex flex-col text-left">
-          <span className="text-md font-bold text-highlight-semilight">
-            Step {stepIndex} of {totalSteps}
-          </span>
-          <h1 className="text-lg font-bold text-secondary font-ubuntu">
-            Tell us about yourself
-          </h1>
-        </div>
-      </div>
-
       <div className="flex flex-col w-[80%] gap-4 mx-auto">
         {/* First Name */}
         <div className="flex flex-col gap-2">

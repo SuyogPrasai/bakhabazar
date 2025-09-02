@@ -41,36 +41,8 @@ export default function PasswordStep({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full max-w-sm flex-col gap-6"
+      className="flex w-full max-w-sm flex-col gap-6 mx-auto"
     >
-      {/* Progress Bar */}
-      <div className="w-full h-[3px] bg-highlight rounded-full">
-        <div
-          className="h-[3px] bg-primary rounded-full"
-          style={{ width: `${((stepIndex) / totalSteps) * 100}%` }}
-        ></div>
-      </div>
-
-      {/* Back + Step + Title */}
-      <div className="flex gap-3">
-        {onBack && (
-          <button
-            type="button"
-            onClick={onBack}
-            className="text-secondary hover:text-primary"
-          >
-            <ChevronLeft className="h-8 w-8 text-highlight-semilight hover:text-highlight-light cursor-pointer" />
-          </button>
-        )}
-        <div className="flex flex-col text-left">
-          <span className="text-md font-bold text-highlight-semilight">
-            Step {stepIndex} of {totalSteps}
-          </span>
-          <h1 className="text-lg font-bold text-secondary font-ubuntu">
-            Create a password
-          </h1>
-        </div>
-      </div>
 
       {/* Step Content */}
       <div className="w-[90%] mx-auto">
