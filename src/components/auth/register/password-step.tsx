@@ -3,9 +3,15 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Check, Eye, EyeOff, ChevronLeft } from "lucide-react"
+import { Check, Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { setPasswordSchema } from "@/schemas/setPasswordSchema"
+
+type PasswordFormValues = z.infer<typeof setPasswordSchema>
 
 interface PasswordStepProps {
   password: string
@@ -20,31 +26,37 @@ export default function PasswordStep({
   password,
   setPassword,
   onNext,
-  onBack,
-  stepIndex,
-  totalSteps,
 }: PasswordStepProps) {
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
-  // Validation rules
-  const hasLetter = /[a-zA-Z]/.test(password)
-  const hasNumberOrSpecial = /[\d\W]/.test(password)
-  const hasMinLength = password.length >= 10
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<PasswordFormValues>({
+    resolver: zodResolver(setPasswordSchema),
+    defaultValues: { password, confirm_password: "" },
+  })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (hasLetter && hasNumberOrSpecial && hasMinLength) {
-      onNext()
-    }
+  const currentPassword = watch("password")
+
+  const onSubmit = (data: PasswordFormValues) => {
+    setPassword(data.password)
+    onNext()
   }
+
+  // Checklist logic
+  const hasLetter = /[a-zA-Z]/.test(currentPassword || "")
+  const hasNumberOrSpecial = /[\d\W]/.test(currentPassword || "")
+  const hasMinLength = (currentPassword || "").length >= 6
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex w-full max-w-sm flex-col gap-6 mx-auto"
     >
-
-      {/* Step Content */}
       <div className="w-[90%] mx-auto">
         <div className="flex flex-col gap-4 text-left">
           {/* Password Input */}
@@ -56,9 +68,8 @@ export default function PasswordStep({
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                {...register("password")}
                 className="text-secondary p-6 pr-12 font-semibold border-highlight"
               />
               <button
@@ -73,9 +84,49 @@ export default function PasswordStep({
                 )}
               </button>
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
-          {/* Validation checklist */}
+          {/* Confirm Password */}
+          <div className="flex flex-col gap-2">
+            <Label
+              htmlFor="confirm_password"
+              className="text-secondary font-semibold"
+            >
+              Confirm Password
+            </Label>
+            <div className="relative">
+              <Input
+                id="confirm_password"
+                type={showConfirm ? "text" : "password"}
+                placeholder="Re-enter your password"
+                {...register("confirm_password")}
+                className="text-secondary p-6 pr-12 font-semibold border-highlight"
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary"
+                onClick={() => setShowConfirm(!showConfirm)}
+              >
+                {showConfirm ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            {errors.confirm_password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.confirm_password.message}
+              </p>
+            )}
+          </div>
+
+          {/* Checklist */}
           <div className="flex flex-col gap-2 text-sm text-secondary">
             <p className="font-bold">Your password must contain at least</p>
             <div className="flex items-center gap-2">
@@ -103,7 +154,7 @@ export default function PasswordStep({
                   hasMinLength ? "bg-green-500" : "bg-muted-foreground"
                 )}
               />
-              <span>10 characters</span>
+              <span>6 characters</span>
             </div>
           </div>
 

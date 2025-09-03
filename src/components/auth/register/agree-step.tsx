@@ -7,7 +7,7 @@ import { useState } from "react"
 
 interface TermsStepProps {
     onNext: () => void
-    onBack?: () => void
+    onBack: () => void
     stepIndex: number
     totalSteps: number
 }

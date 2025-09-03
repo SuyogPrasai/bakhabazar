@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Toaster } from "@/components/ui/sonner"
 import {
   Geist,
   Geist_Mono,
@@ -73,6 +74,7 @@ export default function RootLayout({
         `}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   )

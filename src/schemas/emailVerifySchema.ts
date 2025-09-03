@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from "zod"
 
-const emailSchema = z.string()
-  .email("Invalid email format")
 export const emailVerifySchema = z.object({
-  email: emailSchema,
-});
+  email: z.string().email("Please enter a valid email address"),
+})
+
+export type EmailFormValues = z.infer<typeof emailVerifySchema>

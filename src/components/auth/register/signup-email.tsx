@@ -5,6 +5,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image"
 import { FaApple } from "react-icons/fa"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { emailVerifySchema, EmailFormValues } from "@/schemas/emailVerifySchema"
+import { useState } from "react"
 
 interface EmailStepProps {
   storeEmail: string
@@ -13,20 +17,64 @@ interface EmailStepProps {
 }
 
 export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (storeEmail.trim()) {
-      onNext()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<EmailFormValues>({
+    resolver: zodResolver(emailVerifySchema),
+    defaultValues: { email: storeEmail },
+  })
+
+  const [loading, setLoading] = useState(false)
+
+  const onSubmit = async (data: EmailFormValues) => {
+    setLoading(true)
+    try {
+      const res = await fetch(
+        `http://192.168.1.66/api/register/?email=${encodeURIComponent(
+          data.email
+        )}`
+      )
+
+      if (res.status === 200) {
+        // ✅ Email already exists
+        setError("email", {
+          type: "manual",
+          message: "This email is already registered.",
+        })
+        return
+      }
+
+      if (res.status === 404) {
+        // ✅ Email is available → proceed
+        setEmail(data.email)
+        onNext()
+        return
+      }
+
+      // Other errors
+      setError("email", {
+        type: "manual",
+        message: "Server error. Please try again later.",
+      })
+    } catch (err) {
+      setError("email", {
+        type: "manual",
+        message: "Network error. Please check your connection.",
+      })
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
-
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex w-full max-w-sm flex-col gap-2"
     >
-      {/* Logo */}
+      {/* Header */}
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-5xl font-extrabold text-secondary font-ubuntu">
           Sign up to start listening
@@ -44,22 +92,25 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
           </Label>
           <Input
             id="email"
-            name="email"
             type="email"
-            value={storeEmail}
             placeholder="Enter your email address"
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            {...register("email")}
             className="text-secondary p-6 border-highlight mt-2 font-semibold"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.email.message}
+            </p>
+          )}
         </div>
 
-        {/* Primary Button */}
+        {/* Next Button */}
         <Button
           type="submit"
+          disabled={loading}
           className="bg-primary font-bold text-primary-foreground hover:bg-primary/90 cursor-pointer rounded-full py-6 w-[90%] mx-auto mt-5"
         >
-          Next
+          {loading ? "Checking..." : "Next"}
         </Button>
 
         {/* Divider */}
@@ -67,7 +118,7 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
           <span className="relative text-secondary px-2 text-lg">or</span>
         </div>
 
-        {/* Social Signups */}
+        {/* Social Buttons */}
         <div className="grid gap-4">
           <Button
             variant="outline"
@@ -98,7 +149,7 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
       {/* Footer */}
       <div className="text-sm text-secondary mt-1">
         Already have an account?{" "}
-        <a href="#" className="underline underline-offset-4 text-secondary">
+        <a href="/login" className="underline underline-offset-4 text-secondary">
           Log in here.
         </a>
       </div>

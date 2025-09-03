@@ -2,21 +2,9 @@ import React from "react"
 import { ChevronLeft } from "lucide-react"
 import PasswordStep from "./password-step"
 import DetailStep from "./details-step"
+import UsernameStep from "./username-step"
 import TermsStep from "./agree-step"
-
-interface StepManagerProps {
-  step: "email" | "password" | "details" | "terms"
-  password: string
-  setPassword: (val: string) => void
-  prevStep: () => void
-  nextStep: () => void
-  firstName: string
-  lastName: string
-  setFirstName: (val: string) => void
-  setLastName: (val: string) => void
-  dob: { day: string; month: string; year: string }
-  setDob: (val: { day: string; month: string; year: string }) => void
-}
+import { StepManagerProps } from "@/types/signup-types"
 
 function StepManager({
   step,
@@ -30,10 +18,20 @@ function StepManager({
   setLastName,
   dob,
   setDob,
+  username,
+  setUsername,
 }: StepManagerProps) {
-  const totalSteps = 3
+  const totalSteps = 4
   const stepIndex =
-    step === "password" ? 1 : step === "details" ? 2 : step === "terms" ? 3 : 0
+    step === "password"
+      ? 1
+      : step === "details"
+      ? 2
+      : step === "username"
+      ? 3
+      : step === "terms"
+      ? 4
+      : 0
 
   return (
     <div className="flex flex-col items-center w-full mx-auto h-full max-h-screen">
@@ -67,6 +65,8 @@ function StepManager({
                 ? "Create a password"
                 : step === "details"
                 ? "Enter your details"
+                : step === "username"
+                ? "Choose a username"
                 : step === "terms"
                 ? "Terms & Conditions"
                 : "Start"}
@@ -103,11 +103,22 @@ function StepManager({
           />
         )}
 
+        {step === "username" && (
+          <UsernameStep
+            username={username}
+            setUsername={setUsername}
+            onBack={prevStep}
+            onNext={nextStep}
+            stepIndex={3}
+            totalSteps={totalSteps}
+          />
+        )}
+
         {step === "terms" && (
           <TermsStep
             onBack={prevStep}
             onNext={nextStep}
-            stepIndex={3}
+            stepIndex={4}
             totalSteps={totalSteps}
           />
         )}
