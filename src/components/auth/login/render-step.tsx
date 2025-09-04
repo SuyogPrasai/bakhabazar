@@ -24,8 +24,6 @@ export function RenderLoginStep({
         setPassword={setPassword}
         onNext={nextStep}
         onBack={prevStep}
-        stepIndex={1}
-        totalSteps={1}
       />
     )
   }
