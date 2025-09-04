@@ -28,9 +28,25 @@ function HomeNav() {
           />
         </div>
       </div>
+      <div className="flex items-center mr-10 gap-5">
+        {/* Left - Signup Button */}
+        <div className="flex items-center">
+          <Link href="/register" passHref>
+            <button
+              className="px-4 py-2 rounded-full bg-highlight-light text-black font-medium 
+               hover:opacity-90 hover:scale-105 hover:shadow-lg 
+               transition transform duration-200 cursor-pointer"
+            >
+              Sign up
+            </button>
+          </Link>
 
-      {/* Right - Notifications */}
-      <NotificationsBell />
+        </div>
+        {/* Right - Notifications */}
+
+        <NotificationsBell />
+      </div>
+
     </div>
   );
 }

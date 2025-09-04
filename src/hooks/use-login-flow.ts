@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation"
 import { LoginStep } from "@/types/login-types"
 import { toast } from "sonner"
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+
+
 export function useLoginFlow() {
   const [step, setStep] = useState<LoginStep>("email")
   const [email, setEmail] = useState("")
@@ -18,7 +21,7 @@ export function useLoginFlow() {
       setLoading(true)
 
       const csrfToken = Cookies.get("csrftoken")
-      const res = await fetch("http://192.168.1.66/api/login/", {
+      const res = await fetch(`${API_BASE_URL}/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +32,7 @@ export function useLoginFlow() {
           email,
           password,
         }),
-      })
+      });
 
       if (!res.ok) {
         let errorMsg = "Login failed"

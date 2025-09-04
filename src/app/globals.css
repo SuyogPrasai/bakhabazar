@@ -54,6 +54,7 @@
   --font-roboto: var(--font-roboto);
   --font-lato: var(--font-lato);
   --font-ubuntu: var(--font-ubuntu);
+  --color-sonner-foreground: var(--sonner-foreground);
 }
 
 :root {
@@ -63,9 +64,10 @@
   --card: #242424;
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0% 0 0);
+  --popover-foreground: oklch(99.336% 0.00316 15.246);
   --primary: oklch(0.637 0.237 25.331);
   --primary-foreground: oklch(0.971 0.013 17.38);
+  --sonner-foreground: oklch(0% 0 0);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.967 0.001 286.375);
@@ -203,4 +205,3 @@
 }
 
 }
-

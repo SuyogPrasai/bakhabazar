@@ -15,13 +15,16 @@ export function useSignupFlow() {
   const [dob, setDob] = useState<Dob>({ day: "", month: "", year: "" })
   const [password, setPassword] = useState<SignupState["password"]>("")
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+
+
   const router = useRouter()
   const submitForm = async () => {
     const formattedDob = `${dob.year}-${parseInt(dob.month)}-${parseInt(dob.day)}`
 
     try {
       const csrfToken = Cookies.get("csrftoken")
-      const res = await fetch("http://192.168.1.66/api/register/", {
+      const res = await fetch(`${API_BASE_URL}/register/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +39,7 @@ export function useSignupFlow() {
           dob: formattedDob,
           password,
         }),
-      })
+      });
 
       if (!res.ok) {
         throw new Error("Signup failed")

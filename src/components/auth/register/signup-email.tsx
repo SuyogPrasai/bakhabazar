@@ -10,6 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { emailVerifySchema, EmailFormValues } from "@/schemas/emailVerifySchema"
 import { useState } from "react"
 
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+
+
 interface EmailStepProps {
   storeEmail: string
   setEmail: (email: string) => void
@@ -33,10 +37,8 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
     setLoading(true)
     try {
       const res = await fetch(
-        `http://192.168.1.66/api/register/?email=${encodeURIComponent(
-          data.email
-        )}`
-      )
+        `${API_BASE_URL}/register/?email=${encodeURIComponent(data.email)}`
+      );
 
       if (res.status === 200) {
         // ✅ Email already exists

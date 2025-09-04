@@ -16,6 +16,7 @@ interface UsernameStepProps {
   stepIndex: number
   totalSteps: number
 }
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
 
 export default function UsernameStep({
   username,
@@ -38,9 +39,8 @@ export default function UsernameStep({
 
 
     const res = await fetch(
-      `http://192.168.1.66/api/register/?username=${encodeURIComponent(data.username)}`
-    )
-
+      `${API_BASE_URL}/register/?username=${encodeURIComponent(data.username)}`
+    );
     if (res.status === 200) {
       // Username exists
       setServerError("That username is already taken. Please choose another.")
