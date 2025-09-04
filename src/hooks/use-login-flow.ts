@@ -8,7 +8,6 @@ import { toast } from "sonner"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
 
-
 export function useLoginFlow() {
   const [step, setStep] = useState<LoginStep>("email")
   const [email, setEmail] = useState("")
@@ -42,7 +41,7 @@ export function useLoginFlow() {
             errorMsg = errorData.detail
           }
         } catch {
-          // fallback to generic message
+          // In case parsing errorData fails
         }
         throw new Error(errorMsg)
       }
@@ -59,9 +58,15 @@ export function useLoginFlow() {
 
       // Redirect to dashboard or home
       router.push("/home")
-    } catch (err: any) {
-      console.error("Error logging in:", err)
-      toast.error(err.message || "Something went wrong. Please try again.")
+    } catch (err: unknown) {
+      // Cast to Error type for better handling
+      if (err instanceof Error) {
+        console.error("Error logging in:", err)
+        toast.error(err.message || "Something went wrong. Please try again.")
+      } else {
+        console.error("Unexpected error:", err)
+        toast.error("Something went wrong. Please try again.")
+      }
     } finally {
       setLoading(false)
     }

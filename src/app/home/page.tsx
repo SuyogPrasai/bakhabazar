@@ -1,27 +1,24 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import Footer from "@/components/footer"
-import HomeMain from "@/components/home-main"
-import HomeNav from "@/components/home-nav"
-import Stories from "@/components/story-row"
-import SpotlightSlider from "@/components/image-slider"
-import PlayBar from "@/components/play-bar"
-import TopComments from "@/components/top-comments-home"
-import Trending from "@/components/trending"
-
+import { AppSidebar } from "@/components/layout/app-sidebar"
+import Footer from "@/components/layout/footer"
+import HomeMain from "@/components/home/home-main"
+import HomeNav from "@/components/layout/home-nav"
+import SpotlightSlider from "@/components/home/image-slider"
+import PlayBar from "@/components/player/play-bar"
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import StorySpotlight from "@/components/home-spotlight"
+import StorySpotlight from "@/components/layout/home-spotlight"
 
 export default function Home() {
+
   return (
     <SidebarProvider
-      className="h-screen w-full bg-black overflow-hidden p-2"
+      className="h-screen w-full bg-sidebar overflow-hidden p-2"
       defaultOpen={false}
     >
       {/* Sidebar */}
-      <AppSidebar className="bg-black py-5" />
+      <AppSidebar className="bg-sidebar py-5" />
 
       {/* Main content */}
       <SidebarInset className="flex flex-col bg-background">
@@ -30,7 +27,6 @@ export default function Home() {
 
         {/* Scrollable content */}
         <div className="flex flex-col overflow-y-auto no-scroll gap-6">
-
           {/* Responsive main + spotlight layout */}
           <div
             id="home-main"
@@ -38,15 +34,12 @@ export default function Home() {
           >
             {/* Left column */}
             <div className="lg:col-span-2 flex flex-col gap-6 min-w-[300px]">
-              <div className=" rounded-xs">
-                <HomeMain />
-              </div>
+              <HomeMain />
 
               <SpotlightSlider />
-              {/* <TopComments /> */}
-              <div className=" rounded-xs">
-                <HomeMain />
-              </div>
+
+              <HomeMain />
+
               <Footer />
             </div>
 
@@ -62,23 +55,14 @@ export default function Home() {
                       "A mythical demon-like being in Nepali folklore, known for its fierce dance during festivals and role as a protector against evil spirits.",
                     views: 12450,
                   },
-                  {
-                    name: "Kathmandu",
-                    description:
-                      "The capital city of Nepal, known for its vibrant culture, festivals, and deep connection to ancient traditions and myths.",
-                    views: 9320,
-                  },
                 ]}
               />
             </div>
-
           </div>
         </div>
 
-        {/* Fixed Playbar at bottom */}
-        <div className="shrink-0">
-          <PlayBar />
-        </div>
+        <PlayBar />
+
       </SidebarInset>
     </SidebarProvider>
   )

@@ -4,7 +4,7 @@
 import * as React from "react"
 import { X, Bookmark } from "lucide-react"
 import Image from "next/image"
-import { NavUser } from "@/components/nav-user"
+import { NavUser } from "@/components/layout/nav-user"
 import {
   Sidebar,
   SidebarContent,

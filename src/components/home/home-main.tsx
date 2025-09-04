@@ -1,6 +1,6 @@
 import { SEGMENT_EXPLORER_SIMULATED_ERROR_MESSAGE } from 'next/dist/next-devtools/userspace/app/segment-explorer-node'
 import React from 'react'
-import Stories from './story-row'
+import Stories from '@/components/home/story-row'
 
 function HomeMain() {
     return (

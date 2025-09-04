@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { SidebarTrigger, useSidebar } from "./ui/sidebar"
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
 
 export function CommunityHeader() {
   const { state } = useSidebar()

@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import StoryCard from "./story-card"; // adjust the path if needed
+import StoryCard from "@/components/home/story-card"; // adjust the path if needed
 
 const Stories = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
