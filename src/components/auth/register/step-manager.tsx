@@ -1,4 +1,4 @@
-import React, { Key } from "react"
+import React from "react"
 import { ChevronLeft } from "lucide-react"
 import PasswordStep from "./password-step"
 import DetailStep from "./details-step"

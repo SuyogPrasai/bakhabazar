@@ -2,7 +2,8 @@
 
 import Cookies from "js-cookie"
 import { useState } from "react"
-import type { Step, Dob, SignupState } from "@/types/signup-types"
+import type { Step, SignupState } from "@/types/signup-types"
+import type { Dob } from "@/types/models/helper"
 import { useRouter } from "next/navigation"
 import { parseDob } from "@/helper/dobParser"
 

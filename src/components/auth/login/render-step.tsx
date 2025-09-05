@@ -2,7 +2,21 @@
 
 import { UsernameStep } from "@/components/auth/login/login-username"
 import PasswordStep from "./password-step"
-import type { RenderLoginStepProps } from "@/types/login-types"
+import { Step, LoginState } from "@/types/login-types"
+// Props for rendering login steps
+interface RenderLoginStepProps {
+  step: Step
+  prevStep: () => void
+  nextStep: () => void
+
+  // Username step
+  username: LoginState["username"]
+  setUsername: (username: LoginState["username"]) => void
+
+  // Password step
+  password: LoginState["password"]
+  setPassword: (password: LoginState["password"]) => void
+}
 
 export function RenderLoginStep({
   step,

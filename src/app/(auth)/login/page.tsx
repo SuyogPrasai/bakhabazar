@@ -1,7 +1,6 @@
 "use client"
 
 import { RenderLoginStep } from "@/components/auth/login/render-step"
-import { useRouter } from "next/navigation"
 import { useLoginFlow } from "@/hooks/use-login-flow"
 
 export default function LoginPage() {

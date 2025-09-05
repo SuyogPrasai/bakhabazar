@@ -14,9 +14,6 @@ interface TermsStepProps {
 
 export default function TermsStep({
     onNext,
-    onBack,
-    stepIndex,
-    totalSteps,
 }: TermsStepProps) {
     const [checked, setChecked] = useState({
         news: false,

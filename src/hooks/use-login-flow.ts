@@ -3,13 +3,13 @@
 import Cookies from "js-cookie"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { LoginStep } from "@/types/login-types"
+import { Step } from "@/types/login-types"
 import { toast } from "sonner"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
 
 export function useLoginFlow() {
-  const [step, setStep] = useState<LoginStep>("username")
+  const [step, setStep] = useState<Step>("username")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)

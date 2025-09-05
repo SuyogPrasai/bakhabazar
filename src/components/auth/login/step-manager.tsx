@@ -1,6 +1,33 @@
 import React from "react"
 import { ChevronLeft } from "lucide-react"
-import { StepManagerProps } from "@/types/signup-types"
+import { LoginState, Step } from "@/types/login-types"
+import PasswordStep from "./password-step"
+
+interface StepManagerProps {
+  step: Step
+  prevStep: () => void
+  nextStep: () => void
+
+  // Username step
+  username: LoginState["username"]
+  setUsername: (username: LoginState["username"]) => void
+
+  // Password step
+  password: LoginState["password"]
+  setPassword: (password: LoginState["password"]) => void
+}
+
+const totalSteps = 1
+
+const stepMapping: Record<string, number> = {
+  "password": 1,
+};
+
+const stepLabels: { [key in Step]: string } = {
+  username: "",
+  password: "Create a password",
+};
+
 
 function StepManager({
   step,
@@ -8,26 +35,8 @@ function StepManager({
   setPassword,
   prevStep,
   nextStep,
-  firstName,
-  lastName,
-  setFirstName,
-  setLastName,
-  dob,
-  setDob,
-  username,
-  setUsername,
 }: StepManagerProps) {
-  const totalSteps = 4
-  const stepIndex =
-    step === "password"
-      ? 1
-      : step === "details"
-      ? 2
-      : step === "username"
-      ? 3
-      : step === "terms"
-      ? 4
-      : 0
+  const stepIndex = stepMapping[step] || 0;
 
   return (
     <div className="flex flex-col items-center w-full mx-auto h-full max-h-screen">
@@ -57,15 +66,7 @@ function StepManager({
               Step {stepIndex} of {totalSteps}
             </span>
             <h1 className="text-lg font-bold text-secondary font-ubuntu">
-              {step === "password"
-                ? "Create a password"
-                : step === "details"
-                ? "Enter your details"
-                : step === "username"
-                ? "Choose a username"
-                : step === "terms"
-                ? "Terms & Conditions"
-                : "Start"}
+              {stepLabels[step] || ""}
             </h1>
           </div>
         </div>
@@ -73,17 +74,14 @@ function StepManager({
 
       {/* Scrollable Content */}
       <div className="w-full max-w-md flex-1 overflow-y-auto pb-6">
-        {/* {step === "password" && (
+        {step === "password" && (
           <PasswordStep
             password={password}
             setPassword={setPassword}
             onBack={prevStep}
             onNext={nextStep}
-            stepIndex={1}
-            totalSteps={totalSteps}
           />
-        )} */}
-
+        )}
       </div>
     </div>
   )
