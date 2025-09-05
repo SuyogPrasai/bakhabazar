@@ -54,7 +54,7 @@ export function useLoginFlow() {
         Cookies.set("authToken", data.token)
       }
 
-      toast.success("Login successful 🎉")
+      toast.success("Login successful")
 
       // Redirect to dashboard or home
       router.push("/home")

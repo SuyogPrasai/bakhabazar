@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface RankCardProps {
   rank: string | number;
   title: string;
@@ -17,9 +19,11 @@ export function RankCard({ rank, title, imageUrl }: RankCardProps) {
 
       {/* Image Section */}
       <div className="w-full h-full bg-white rounded-xl overflow-hidden">
-        <img
+        <Image
           src={imageUrl}
           alt={title}
+          width={500}   // adjust as needed
+          height={500}  // adjust as needed
           className="w-full h-full object-cover"
         />
       </div>

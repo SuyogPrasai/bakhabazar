@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Play } from "lucide-react"; // play button icon
+import Image from "next/image"
 
 export default function SongCard() {
   const [image, setImage] = useState("");
@@ -17,9 +18,11 @@ export default function SongCard() {
       {/* Image */}
       <div className="relative aspect-square w-full bg-light-background-dark rounded-md overflow-hidden">
         {image && (
-          <img
+          <Image
             src={image}
             alt="Random Album Art"
+            width={500} // set appropriate width
+            height={500} // set appropriate height
             className="w-full h-full object-cover"
           />
         )}
