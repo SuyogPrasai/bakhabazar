@@ -9,6 +9,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import StorySpotlight from "@/components/layout/home-spotlight"
+import Csrf from "@/components/backend/csrf"
 
 export default function Home() {
 
@@ -17,6 +18,7 @@ export default function Home() {
       className="h-screen w-full bg-sidebar overflow-hidden p-2"
       defaultOpen={false}
     >
+      <Csrf />
       {/* Sidebar */}
       <AppSidebar className="bg-sidebar py-5" />
 
