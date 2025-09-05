@@ -6,8 +6,9 @@ import type { Step, SignupState } from "@/types/signup-types"
 import type { Dob } from "@/types/models/helper"
 import { useRouter } from "next/navigation"
 import { parseDob } from "@/helper/dobParser"
+import { findBackend } from "@/helper/findBackend"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+const API_BASE_URL = findBackend();
 
 export function useSignupFlow() {
   const [step, setStep] = useState<Step>("email")
@@ -27,7 +28,7 @@ export function useSignupFlow() {
     try {
       const csrfToken = Cookies.get("csrftoken")
 
-      const res = await fetch(`${API_BASE_URL}api/register/`, {
+      const res = await fetch(`${API_BASE_URL}/api/register/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

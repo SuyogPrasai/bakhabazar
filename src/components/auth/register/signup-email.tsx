@@ -9,8 +9,9 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { emailVerifySchema, EmailFormValues } from "@/schemas/emailVerifySchema"
 import { useState } from "react"
+import { findBackend } from "@/helper/findBackend"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+const API_BASE_URL = findBackend();
 
 interface EmailStepProps {
   storeEmail: string
@@ -36,7 +37,7 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
     setLoading(true)
     try {
       const res = await fetch(
-        `${API_BASE_URL}api/register/?email=${encodeURIComponent(data.email)}`
+        `${API_BASE_URL}/api/register/?email=${encodeURIComponent(data.email)}`
       );
 
       if (res.status === 400) {

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { usernameSchema, UsernameFormValues } from "@/schemas/usernameSchema"
+import { findBackend } from "@/helper/findBackend"
 import { useState } from "react"
 
 interface UsernameStepProps {
@@ -16,7 +17,8 @@ interface UsernameStepProps {
   stepIndex: number
   totalSteps: number
 }
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+
+const API_BASE_URL = findBackend();
 
 export default function UsernameStep({
   username,
@@ -39,7 +41,7 @@ export default function UsernameStep({
 
 
     const res = await fetch(
-      `${API_BASE_URL}api/register/?username=${encodeURIComponent(data.username)}`
+      `${API_BASE_URL}/api/register/?username=${encodeURIComponent(data.username)}`
     );
     if (res.status === 400) {
       // Username exists

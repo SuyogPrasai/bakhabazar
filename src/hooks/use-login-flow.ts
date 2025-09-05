@@ -5,8 +5,9 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Step } from "@/types/login-types"
 import { toast } from "sonner"
+import { findBackend } from "@/helper/findBackend"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
+const API_BASE_URL = findBackend();
 
 export function useLoginFlow() {
   const [step, setStep] = useState<Step>("username")
@@ -20,7 +21,7 @@ export function useLoginFlow() {
       setLoading(true)
 
       const csrfToken = Cookies.get("csrftoken")
-      const res = await fetch(`${API_BASE_URL}api/login/`, {
+      const res = await fetch(`${API_BASE_URL}/api/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
