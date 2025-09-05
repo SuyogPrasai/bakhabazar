@@ -10,9 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { emailVerifySchema, EmailFormValues } from "@/schemas/emailVerifySchema"
 import { useState } from "react"
 
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
-
 
 interface EmailStepProps {
   storeEmail: string
@@ -21,6 +19,7 @@ interface EmailStepProps {
 }
 
 export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
+
   const {
     register,
     handleSubmit,
@@ -65,7 +64,6 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
       setError("email", {
         type: "manual",
         message: "Network error. Please check your connection" + err,
-
       })
     } finally {
       setLoading(false)

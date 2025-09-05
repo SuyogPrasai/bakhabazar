@@ -4,6 +4,9 @@ import Cookies from "js-cookie"
 import { useState } from "react"
 import type { Step, Dob, SignupState } from "@/types/signup-types"
 import { useRouter } from "next/navigation"
+import { parseDob } from "@/helper/dobParser"
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
 
 export function useSignupFlow() {
   const [step, setStep] = useState<Step>("email")
@@ -15,15 +18,14 @@ export function useSignupFlow() {
   const [dob, setDob] = useState<Dob>({ day: "", month: "", year: "" })
   const [password, setPassword] = useState<SignupState["password"]>("")
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
-
-
   const router = useRouter()
+  
   const submitForm = async () => {
-    const formattedDob = `${dob.year}-${parseInt(dob.month)}-${parseInt(dob.day)}`
+    const formattedDob = parseDob(dob)
 
     try {
       const csrfToken = Cookies.get("csrftoken")
+
       const res = await fetch(`${API_BASE_URL}api/register/`, {
         method: "POST",
         headers: {
@@ -44,14 +46,14 @@ export function useSignupFlow() {
       if (!res.ok) {
         throw new Error("Signup failed")
       }
-
-      const data = await res.json()
-      console.log("Signup success:", data)
-
       // Redirect to login after success
       router.push("/login")
     } catch (err) {
-      console.error("Error submitting signup:", err)
+      if (err instanceof Error) {
+        console.error("Error submitting signup:", err.message)
+      } else {
+        console.error("Unexpected error at signup:", err)
+      }
     }
   }
 
@@ -87,6 +89,7 @@ export function useSignupFlow() {
     setDob,
     password,
     setPassword,
+
     nextStep,
     prevStep,
   }

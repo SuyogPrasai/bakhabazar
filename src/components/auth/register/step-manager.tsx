@@ -1,37 +1,70 @@
-import React from "react"
+import React, { Key } from "react"
 import { ChevronLeft } from "lucide-react"
 import PasswordStep from "./password-step"
 import DetailStep from "./details-step"
 import UsernameStep from "./username-step"
 import TermsStep from "./agree-step"
-import { StepManagerProps } from "@/types/signup-types"
+import type { Step } from "@/types/signup-types"
+import { SignupState } from "@/types/signup-types"
+
+interface StepManagerProps {
+  step: Step
+  prevStep: () => void
+  nextStep: () => void
+
+  // Password step
+  password: SignupState["password"]
+  setPassword: (password: SignupState["password"]) => void
+
+  // Details step
+  firstName: SignupState["firstName"]
+  setFirstName: (firstName: SignupState["firstName"]) => void
+  lastName: SignupState["lastName"]
+  setLastName: (lastName: SignupState["lastName"]) => void
+  dob: SignupState["dob"]
+  setDob: (dob: SignupState["dob"]) => void
+
+  // Username step
+  username: SignupState["username"]
+  setUsername: (username: SignupState["username"]) => void
+}
+
+const totalSteps = 4
+
+const stepMapping: Record<string, number> = {
+  "password": 1,
+  "details": 2,
+  "username": 3,
+  "terms": 4
+};
+
+const stepLabels: { [key in Step]: string } = {
+  email: "",
+  password: "Create a password",
+  details: "Enter your details",
+  username: "Choose a username",
+  terms: "Terms & Conditions",
+};
 
 function StepManager({
   step,
   password,
-  setPassword,
-  prevStep,
-  nextStep,
   firstName,
   lastName,
+  dob,
+  username,
+
+  setPassword,
   setFirstName,
   setLastName,
-  dob,
   setDob,
-  username,
   setUsername,
+
+  prevStep,
+  nextStep,
 }: StepManagerProps) {
-  const totalSteps = 4
-  const stepIndex =
-    step === "password"
-      ? 1
-      : step === "details"
-      ? 2
-      : step === "username"
-      ? 3
-      : step === "terms"
-      ? 4
-      : 0
+
+  const stepIndex = stepMapping[step] || 0;
 
   return (
     <div className="flex flex-col items-center w-full mx-auto h-full max-h-screen">
@@ -61,15 +94,7 @@ function StepManager({
               Step {stepIndex} of {totalSteps}
             </span>
             <h1 className="text-lg font-bold text-secondary font-ubuntu">
-              {step === "password"
-                ? "Create a password"
-                : step === "details"
-                ? "Enter your details"
-                : step === "username"
-                ? "Choose a username"
-                : step === "terms"
-                ? "Terms & Conditions"
-                : "Start"}
+              {stepLabels[step] || ""}
             </h1>
           </div>
         </div>
