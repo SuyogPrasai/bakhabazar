@@ -13,6 +13,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { CommunityHeader } from "./sidebar-community-header"
+import { useAuth } from "@/hooks/use-auth"
 
 const communityItems = [
   { title: "Popular Legends", subtitle: "Explore", image: "/icons/popular.png" },
@@ -22,7 +23,13 @@ const communityItems = [
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar() // "expanded" | "collapsed"
-
+  const { user, isLoggedIn, logout } = useAuth()
+  
+  // Fallback values if user is not logged in
+  const userName = isLoggedIn && user ? user.fullname : "Guest"
+  const userEmail = isLoggedIn && user ? user.email : "guest@example.com"
+  // const userAvatar = isLoggedIn && user ? user.avatar : "/default-avatar.png" // Use a default avatar if not available
+  
   return (
     <Sidebar
       {...props}
@@ -32,16 +39,14 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
     >
       {/* Header */}
       <SidebarHeader className="py-4 flex flex-row items-center">
-
+        {/* You can add header content here */}
       </SidebarHeader>
-
 
       {/* Content */}
       <SidebarContent className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
         {/* Community Section */}
         <div className="px-2 bg-accent py-5 rounded-xl flex flex-col">
           <CommunityHeader />
-
           <ul className="space-y-2">
             {communityItems.map((item, i) => (
               <li
@@ -68,7 +73,6 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
             ))}
           </ul>
 
-
           {/* Bookmarks Section */}
           <div
             className={`mt-5 rounded-xl transition-all ${state === "expanded" ? "px-2 bg-accent py-4" : "px-1"
@@ -91,7 +95,6 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
               )}
             </div>
           </div>
-
         </div>
       </SidebarContent>
 
@@ -99,10 +102,12 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <NavUser
           user={{
-            name: "Suyog Prasai",
-            email: "@gamerboy",
+            name: userName,
+            email: userEmail,
             avatar: "",
           }}
+
+          logout={logout}
         />
       </SidebarFooter>
     </Sidebar>

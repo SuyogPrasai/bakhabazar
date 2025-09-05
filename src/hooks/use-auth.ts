@@ -15,15 +15,14 @@ export function useAuth() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const csrfToken = Cookies.get("csrftoken")
+
         const res = await fetch(`${API_BASE_URL}/api/login/`, {
           credentials: "include", // important to send cookies
         })
-
         if (res.ok) {
-          const data = await res.json()
-          setIsLoggedIn(data.isLoggedIn)
-          setUser(data.user)
+          const data: User = await res.json()
+          setIsLoggedIn(true)
+          setUser(data)
         } else {
           setIsLoggedIn(false)
           setUser(null)
@@ -39,5 +38,35 @@ export function useAuth() {
     fetchUser()
   }, [])
 
-  return { isLoggedIn, user, loading }
+  // Define the logout function
+  async function logout() {
+    try {
+      const csrfToken = Cookies.get("csrftoken")
+      const res = await fetch(`${API_BASE_URL}/api/logout/`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken || "",
+        }, // Send cookies along with the request
+      })
+
+      if (res.ok) {
+        // Clear the user session in state
+        setIsLoggedIn(false)
+        setUser(null)
+
+        // Optionally, clear any authentication-related cookies (e.g., csrfToken)
+
+        window.location.reload();
+
+      } else {
+        console.error("Logout failed")
+      }
+    } catch (err) {
+      console.error("Logout error:", err)
+    }
+  }
+
+  return { isLoggedIn, user, loading, logout }
 }

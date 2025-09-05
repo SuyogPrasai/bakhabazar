@@ -31,15 +31,16 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-
 export function NavUser({
   user,
+  logout
 }: {
   user: {
     name: string
     email: string
     avatar: string
-  }
+  },
+  logout: () => void
 }) {
   const { state } = useSidebar()
 
@@ -139,6 +140,7 @@ export function NavUser({
 
             <DropdownMenuItem
               className="cursor-pointer flex items-center gap-2 px-3 py-2 rounded-md text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
+              onClick={logout}
             >
               <LogOut className="h-4 w-4 text-red-400" />
               <span>Log out</span>
