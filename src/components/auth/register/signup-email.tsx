@@ -37,7 +37,7 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
     setLoading(true)
     try {
       const res = await fetch(
-        `${API_BASE_URL}/api/register/?email=${encodeURIComponent(data.email)}`
+        `${API_BASE_URL}api/register/?email=${encodeURIComponent(data.email)}`
       );
 
       if (res.status === 400) {

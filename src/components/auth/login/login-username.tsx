@@ -7,44 +7,41 @@ import Image from "next/image"
 import { FaApple } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  emailVerifySchema,
-  EmailFormValues,
-} from "@/schemas/emailVerifySchema"
+import { usernameSchema, UsernameFormValues } from "@/schemas/usernameSchema"
 import { useState } from "react"
 
-interface EmailStepProps {
-  storeEmail: string
-  setEmail: (email: string) => void
+interface UsernameStepProps {
+  storeUsername: string
+  setUsername: (Username: string) => void
   onNext: () => void
 }
 
-export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
+export function UsernameStep({ storeUsername, setUsername, onNext }: UsernameStepProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EmailFormValues>({
-    resolver: zodResolver(emailVerifySchema),
-    defaultValues: { email: storeEmail },
+  } = useForm<UsernameFormValues>({
+    resolver: zodResolver(usernameSchema),
+    defaultValues: { username: storeUsername },
   })
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit = async (data: EmailFormValues) => {
+  const onSubmit = async (data: UsernameFormValues) => {
     setLoading(true)
     try {
-      // Save email in parent state
-      setEmail(data.email)
+      // Save Username in parent state
+      setUsername(data.username)
 
-      // If you want to check email exists on server, add fetch here
+      // If you want to check Username exists on server, add fetch here
       // Example:
-      // const res = await fetch("/api/check-email", { method: "POST", body: JSON.stringify({ email: data.email }) })
+      // const res = await fetch("api/check-Username", { method: "POST", body: JSON.stringify({ Username: data.Username }) })
 
       // Move to password step
       onNext()
     } catch (err) {
-      console.error("Email validation failed", err)
+      console.error("Username validation failed", err)
     } finally {
       setLoading(false)
     }
@@ -63,24 +60,19 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
       </div>
 
       <div className="flex flex-col w-[90%] mx-auto">
-        {/* Email Input */}
+        {/* Username Input */}
         <div className="grid gap-2 text-left mt-5 bg-sidebar">
-          <Label
-            htmlFor="email"
-            className="text-secondary font-semibold font-ubuntu"
-          >
-            Email address
-          </Label>
+
           <Input
-            id="email"
-            type="email"
-            placeholder="Enter your email address"
-            {...register("email")}
+            id="username"
+            type="username"
+            placeholder="Enter your username"
+            {...register("username")}
             className="text-secondary p-6 border-highlight mt-2 font-semibold"
           />
-          {errors.email && (
+          {errors.username && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.email.message}
+              {errors.username.message}
             </p>
           )}
         </div>

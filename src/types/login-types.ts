@@ -1,17 +1,17 @@
 // Possible steps in the login flow
-export type LoginStep = "email" | "password"
+export type LoginStep = "username" | "password"
 
 // Login state
 export interface LoginState {
-  email: string
+  username: string
   password: string
 }
 
 // Props for rendering steps
 export interface RenderLoginStepProps {
   step: LoginStep
-  email: string
-  setEmail: (v: string) => void
+  username: string
+  setUsername: (v: string) => void
   password: string
   setPassword: (v: string) => void
   nextStep: () => void

@@ -9,8 +9,8 @@ import { toast } from "sonner"
 const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND;
 
 export function useLoginFlow() {
-  const [step, setStep] = useState<LoginStep>("email")
-  const [email, setEmail] = useState("")
+  const [step, setStep] = useState<LoginStep>("username")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -20,7 +20,7 @@ export function useLoginFlow() {
       setLoading(true)
 
       const csrfToken = Cookies.get("csrftoken")
-      const res = await fetch(`${API_BASE_URL}/api/login/`, {
+      const res = await fetch(`${API_BASE_URL}api/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export function useLoginFlow() {
         },
         credentials: "include",
         body: JSON.stringify({
-          email,
+          username,
           password,
         }),
       });
@@ -73,21 +73,21 @@ export function useLoginFlow() {
   }
 
   const nextStep = () => {
-    if (step === "email") setStep("password")
+    if (step === "username") setStep("password")
     else if (step === "password") {
       submitLogin()
     }
   }
 
   const prevStep = () => {
-    if (step === "password") setStep("email")
+    if (step === "password") setStep("username")
   }
 
   return {
     step,
     setStep,
-    email,
-    setEmail,
+    username,
+    setUsername,
     password,
     setPassword,
     nextStep,

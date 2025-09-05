@@ -39,13 +39,13 @@ export default function UsernameStep({
 
 
     const res = await fetch(
-      `${API_BASE_URL}/api/register/?username=${encodeURIComponent(data.username)}`
+      `${API_BASE_URL}api/register/?username=${encodeURIComponent(data.username)}`
     );
-    if (res.status === 200) {
+    if (res.status === 400) {
       // Username exists
       setServerError("That username is already taken. Please choose another.")
       return
-    } else if (res.status === 404) {
+    } else if (res.status === 200) {
       // Username available
       setUsername(data.username)
       onNext()

@@ -1,20 +1,20 @@
 "use client"
 
-import { EmailStep } from "@/components/auth/login/login-email"
+import { UsernameStep } from "@/components/auth/login/login-username"
 import PasswordStep from "./password-step"
 import type { RenderLoginStepProps } from "@/types/login-types"
 
 export function RenderLoginStep({
   step,
-  email,
-  setEmail,
+  username,
+  setUsername,
   password,
   setPassword,
   nextStep,
   prevStep,
 }: RenderLoginStepProps) {
-  if (step === "email") {
-    return <EmailStep storeEmail={email} setEmail={setEmail} onNext={nextStep} />
+  if (step === "username") {
+    return <UsernameStep storeUsername={username} setUsername={setUsername} onNext={nextStep} />
   }
 
   if (step === "password") {
