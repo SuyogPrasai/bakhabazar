@@ -39,7 +39,7 @@ export default function UsernameStep({
 
 
     const res = await fetch(
-      `${API_BASE_URL}/register/?username=${encodeURIComponent(data.username)}`
+      `${API_BASE_URL}/api/register/?username=${encodeURIComponent(data.username)}`
     );
     if (res.status === 200) {
       // Username exists

@@ -37,11 +37,11 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
     setLoading(true)
     try {
       const res = await fetch(
-        `${API_BASE_URL}/register/?email=${encodeURIComponent(data.email)}`
+        `${API_BASE_URL}/api/register/?email=${encodeURIComponent(data.email)}`
       );
 
-      if (res.status === 200) {
-        // ✅ Email already exists
+      if (res.status === 400) {
+        // Email already exists
         setError("email", {
           type: "manual",
           message: "This email is already registered.",
@@ -49,8 +49,8 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
         return
       }
 
-      if (res.status === 404) {
-        // ✅ Email is available → proceed
+      if (res.status === 200) {
+        // Email is available → proceed
         setEmail(data.email)
         onNext()
         return

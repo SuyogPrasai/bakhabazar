@@ -20,7 +20,7 @@ export function useLoginFlow() {
       setLoading(true)
 
       const csrfToken = Cookies.get("csrftoken")
-      const res = await fetch(`${API_BASE_URL}/login/`, {
+      const res = await fetch(`${API_BASE_URL}/api/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
