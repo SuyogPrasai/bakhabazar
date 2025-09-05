@@ -2,17 +2,15 @@
 
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import StoryCard from "@/components/home/story-card"; // adjust the path if needed
+import StoryCard from "@/components/home/story-card";
+import { story_general } from "@/types/models/story";
 
-const Stories = () => {
+interface StoriesProps {
+    stories: story_general[];
+}
+
+const Stories = ({ stories }: StoriesProps) => {
     const scrollRef = useRef<HTMLDivElement>(null);
-
-    // Demo data
-    const stories = Array.from({ length: 10 }, (_, i) => ({
-        id: i,
-        title: `Story ${i + 1}`,
-        imageUrl: "",
-    }));
 
     const scroll = (direction: "left" | "right") => {
         if (!scrollRef.current) return;
@@ -24,14 +22,16 @@ const Stories = () => {
     };
 
     return (
-        <div className="text-white rounded-lg w-full relative flex-1 min-w-0  ">
-            <div className="relative ">
+        <div className="text-white rounded-lg w-full relative flex-1 min-w-0">
+            <div className="relative">
                 <div
                     ref={scrollRef}
                     className="flex gap-1 h-full overflow-x-auto no-scroll"
                 >
-                    {stories.map((story) => (
-                        <StoryCard key={story.id} {...story} />
+                    {stories.map((story: story_general) => (
+                        <StoryCard
+                            story={story}
+                        />
                     ))}
                 </div>
 
