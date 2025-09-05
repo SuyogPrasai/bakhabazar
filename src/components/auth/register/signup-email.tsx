@@ -64,7 +64,8 @@ export function EmailStep({ storeEmail, setEmail, onNext }: EmailStepProps) {
     } catch (err) {
       setError("email", {
         type: "manual",
-        message: "Network error. Please check your connection.",
+        message: "Network error. Please check your connection" + err,
+
       })
     } finally {
       setLoading(false)

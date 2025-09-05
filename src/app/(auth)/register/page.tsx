@@ -2,13 +2,10 @@
 
 import { useSignupFlow } from "@/hooks/use-signup-flow"
 import { RenderStep } from "@/components/auth/register/render-step"
-import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 export default function LoginPage() {
 
   const signup = useSignupFlow()
-  const router = useRouter()
   
   return (
     <div className="bg-sidebar flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">

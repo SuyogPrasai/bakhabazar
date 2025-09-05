@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { X, Bookmark } from "lucide-react"
+import { Bookmark } from "lucide-react"
 import Image from "next/image"
 import { NavUser } from "@/components/layout/nav-user"
 import {

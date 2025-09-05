@@ -1,14 +1,12 @@
 "use client"
 
 import { RenderLoginStep } from "@/components/auth/login/render-step"
-import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { useLoginFlow } from "@/hooks/use-login-flow"
 
 export default function LoginPage() {
 
   const login = useLoginFlow()
-  const router = useRouter()
 
   return (
     <div className="bg-sidebar flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">

@@ -1,4 +1,4 @@
-interface entity {
+export interface entity {
     name: string;
     content: string;
     synopsis: string;
