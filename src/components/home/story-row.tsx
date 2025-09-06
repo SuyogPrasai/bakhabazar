@@ -36,6 +36,7 @@ const Stories = ({ stories }: StoriesProps) => {
                         >
                             {stories.map((story: story_general) => (
                                 <StoryCard
+                                    key={story.uuid}
                                     story={story}
                                 />
                             ))}

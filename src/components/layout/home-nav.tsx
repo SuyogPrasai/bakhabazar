@@ -6,7 +6,7 @@ import Link from "next/link"
 import { useAuth } from "@/hooks/use-auth"
 
 function HomeNav() {
-  const { user, isLoggedIn } = useAuth()
+  const { isLoggedIn } = useAuth()
 
   return (
     <div className="flex items-center justify-between bg-[#1a1a1a] px-4 py-3 rounded-t-xl">

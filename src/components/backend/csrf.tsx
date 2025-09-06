@@ -5,7 +5,7 @@ import { findBackend } from '@/helper/findBackend';
 const API_BASE_URL = findBackend();
 
 function Csrf() {
-    const res = fetch(`${API_BASE_URL}/api/csrf/`, {
+    fetch(`${API_BASE_URL}/api/csrf/`, {
         credentials: "include",
     })
     return (
