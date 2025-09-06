@@ -1,34 +1,26 @@
-import { AppSidebar } from "@/components/layout/app-sidebar"
-import Footer from "@/components/layout/footer"
-import HomeMain from "@/components/home/home-main"
-import HomeNav from "@/components/layout/home-nav"
-import SpotlightSlider from "@/components/home/image-slider"
-import PlayBar from "@/components/player/play-bar"
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
-import StorySpotlight from "@/components/layout/home-spotlight"
-import Csrf from "@/components/backend/csrf"
-import axios from "axios"
-import { findBackend } from "@/helper/findBackend"
-import { story_general } from "@/types/models/story"
+import { AppSidebar } from "@/components/layout/app-sidebar";
+import Footer from "@/components/layout/footer";
+import HomeMain from "@/components/home/home-main";
+import HomeNav from "@/components/layout/home-nav";
+import SpotlightSlider from "@/components/home/image-slider";
+import PlayBar from "@/components/player/play-bar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import StorySpotlight from "@/components/layout/home-spotlight";
+import Csrf from "@/components/backend/csrf";
+import axios from "axios";
+import { findBackend } from "@/helper/findBackend";
+import { story_general } from "@/types/models/story";
 
+// Fetch API base URL
 const API_BASE_URL = findBackend();
 
-
 export default async function Home() {
-
-  const row1 = await axios.get<story_general[]>(`${API_BASE_URL}/api/story/`)
-  const row2 = await axios.get<story_general[]>(`${API_BASE_URL}/api/story/`)
-
-  console.log(row1.data)
+  // Server-side data fetching
+  const row1: story_general[] = [];
+  const row2: story_general[] = [];
 
   return (
-    <SidebarProvider
-      className="h-screen w-full bg-sidebar overflow-hidden p-2"
-      defaultOpen={false}
-    >
+    <SidebarProvider className="h-screen w-full bg-sidebar overflow-hidden p-2" defaultOpen={false}>
       <Csrf />
       {/* Sidebar */}
       <AppSidebar className="bg-sidebar py-5" />
@@ -41,18 +33,12 @@ export default async function Home() {
         {/* Scrollable content */}
         <div className="flex flex-col overflow-y-auto no-scroll gap-6">
           {/* Responsive main + spotlight layout */}
-          <div
-            id="home-main"
-            className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-3"
-          >
+          <div id="home-main" className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-3">
             {/* Left column */}
             <div className="lg:col-span-2 flex flex-col gap-6 min-w-[300px]">
-              <HomeMain row1={row1.data} row2={row2.data}/>
-
+              <HomeMain row1={row1} row2={row2} />
               <SpotlightSlider />
-
-              <HomeMain row1={row1.data} row2={row2.data}/>
-
+              <HomeMain row1={row1} row2={row2} />
               <Footer />
             </div>
 
@@ -75,8 +61,7 @@ export default async function Home() {
         </div>
 
         <PlayBar />
-
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
