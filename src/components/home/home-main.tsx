@@ -5,44 +5,40 @@ import Stories from '@/components/home/story-row'
 import { useState } from 'react'
 import { story_general } from '@/types/models/story'
 
-interface HomeMainProps {
-    row1: story_general[];
-    row2: story_general[];
-}
 
-function HomeMain({ row1, row2 }: HomeMainProps) {
+function HomeMain() {
     const [open, setOpen] = useState("All")
+    
+    const row1: story_general[] = [];
+    const row2: story_general[] = [];
 
     return (
         <div className='px-4 md:p-4 flex flex-col gap-4'>
             <div className="heading">
                 <div className="flex gap-2">
-                    <button 
-                        className={`cursor-pointer px-4 py-1 rounded-full font-medium transition ${
-                            open === "All" 
-                                ? "bg-white text-black" 
+                    <button
+                        className={`cursor-pointer px-4 py-1 rounded-full font-medium transition ${open === "All"
+                                ? "bg-white text-black"
                                 : "bg-light-background-dark text-white hover:bg-highlight hover:text-highlight-light"
-                        }`}
+                            }`}
                         onClick={() => setOpen("All")}
                     >
                         All
                     </button>
-                    <button 
-                        className={`cursor-pointer px-4 py-1 rounded-full font-medium transition ${
-                            open === "Stories" 
-                                ? "bg-white text-black" 
+                    <button
+                        className={`cursor-pointer px-4 py-1 rounded-full font-medium transition ${open === "Stories"
+                                ? "bg-white text-black"
                                 : "bg-light-background-dark text-white hover:bg-highlight hover:text-highlight-light"
-                        }`}
+                            }`}
                         onClick={() => setOpen("Stories")}
                     >
                         Stories
                     </button>
-                    <button 
-                        className={`cursor-pointer px-4 py-1 rounded-full font-medium transition ${
-                            open === "Legends" 
-                                ? "bg-white text-black" 
+                    <button
+                        className={`cursor-pointer px-4 py-1 rounded-full font-medium transition ${open === "Legends"
+                                ? "bg-white text-black"
                                 : "bg-light-background-dark text-white hover:bg-highlight hover:text-highlight-light"
-                        }`}
+                            }`}
                         onClick={() => setOpen("Legends")}
                     >
                         Legends

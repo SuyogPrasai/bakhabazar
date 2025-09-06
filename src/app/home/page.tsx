@@ -7,17 +7,12 @@ import PlayBar from "@/components/player/play-bar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import StorySpotlight from "@/components/layout/home-spotlight";
 import Csrf from "@/components/backend/csrf";
-import axios from "axios";
 import { findBackend } from "@/helper/findBackend";
-import { story_general } from "@/types/models/story";
 
 // Fetch API base URL
 const API_BASE_URL = findBackend();
 
 export default async function Home() {
-  // Server-side data fetching
-  const row1: story_general[] = [];
-  const row2: story_general[] = [];
 
   return (
     <SidebarProvider className="h-screen w-full bg-sidebar overflow-hidden p-2" defaultOpen={false}>
@@ -36,9 +31,8 @@ export default async function Home() {
           <div id="home-main" className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-3">
             {/* Left column */}
             <div className="lg:col-span-2 flex flex-col gap-6 min-w-[300px]">
-              <HomeMain row1={row1} row2={row2} />
+              <HomeMain />
               <SpotlightSlider />
-              <HomeMain row1={row1} row2={row2} />
               <Footer />
             </div>
 
