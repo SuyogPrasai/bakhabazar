@@ -2,6 +2,10 @@ import React from "react";
 import { Play } from "lucide-react";
 import Image from "next/image";
 import { story_general } from "@/types/models/story";
+import { findBackend } from "@/helper/findBackend";
+
+// Fetch API base URL
+const API_BASE_URL = findBackend();
 
 interface StoryCardProps {
     story: story_general;
@@ -14,7 +18,7 @@ export default function StoryCard({ story }: StoryCardProps) {
             <div className="relative aspect-square w-full bg-light-background-dark rounded-md overflow-hidden">
                 {story.picture && (
                     <Image
-                        src={story.picture}
+                        src={API_BASE_URL + story.picture}
                         alt={story.title}
                         width={500}
                         height={500}

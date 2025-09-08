@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        protocol: "http",
+        hostname: "192.168.1.66",
+      },
     ],
   },
 };
