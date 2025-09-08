@@ -3,24 +3,24 @@
 import React from "react";
 import { Play } from "lucide-react";
 import Image from "next/image";
-import { story_general } from "@/types/models/podcast";
+import { podcast } from "@/types/models/podcast";
 import { findBackend } from "@/helper/findBackend";
 import { usePodcast } from "@/context/use-podcast";
 
 // Fetch API base URL
 const API_BASE_URL = findBackend();
 
-interface StoryCardProps {
-  story: story_general;
+interface PodcastCardProps {
+  podcast:  podcast;
 }
 
-export default function StoryCard({ story }: StoryCardProps) {
+export default function PodcastCard({ podcast }: PodcastCardProps) {
   const { activePodcast, setActivePodcast } = usePodcast();
 
   const handlePlayClick = () => {
     // Update the global active podcast
     setActivePodcast({
-      ...story,
+      ...podcast,
     });
   };
 
@@ -29,10 +29,10 @@ export default function StoryCard({ story }: StoryCardProps) {
       onClick={handlePlayClick }>
         {/* Image */ }
         < div className="relative aspect-square w-full bg-light-background-dark rounded-md overflow-hidden">
-      {story.picture && (
+      {podcast.picture && (
         <Image
-          src={API_BASE_URL + story.picture}
-          alt={story.title}
+          src={API_BASE_URL + podcast.picture}
+          alt={podcast?.title || "Podcast"}
           width={500}
           height={500}
           className="w-full h-full object-cover"
@@ -47,11 +47,11 @@ export default function StoryCard({ story }: StoryCardProps) {
       </button>
     </div>
 
-      {/* Story Info */ }
+      {/* Podcast Info */ }
       <p className="mt-3 text-white font-medium text-sm truncate">
-        {story.title}
+        {podcast.title}
       </p>
-      <p className="text-gray-400 text-xs truncate">{story.author}</p>
+      <p className="text-gray-400 text-xs truncate">{podcast.author}</p>
     </div >
   );
 }

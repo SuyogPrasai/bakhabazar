@@ -36,15 +36,7 @@ function HomeNav() {
         {/* Show Sign up only if NOT logged in */}
         {!isLoggedIn && (
           <div className="flex items-center gap-5">
-            <Link href="/register" passHref>
-              <button
-                className="px-4 py-2 rounded-full bg-highlight-light text-black font-medium 
-                 hover:opacity-90 hover:scale-105 hover:shadow-lg 
-                 transition transform duration-200 cursor-pointer"
-              >
-                Sign up
-              </button>
-            </Link>
+
             <Link href="/login" passHref>
               <button
                 className="px-4 py-2 rounded-full bg-highlight-light text-black font-medium 

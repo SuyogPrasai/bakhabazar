@@ -1,21 +1,21 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { legend_general, story_general } from "@/types/models/podcast";
 import { findBackend } from "@/helper/findBackend";
+import { podcast } from "@/types/models/podcast";
 
 // Fetch API base URL
 const API_BASE_URL = findBackend();
 
 type PodcastContextType = {
-  activePodcast: legend_general | story_general | null;
-  setActivePodcast: (podcast: legend_general | story_general | null) => void;
+  activePodcast: podcast |  null;
+  setActivePodcast: (podcast: podcast | null) => void;
 };
 
 const PodcastContext = createContext<PodcastContextType | undefined>(undefined);
 
 export function PodcastProvider({ children }: { children: React.ReactNode }) {
-  const [activePodcast, setActivePodcast] = useState<legend_general | story_general | null>(null);
+  const [activePodcast, setActivePodcast] = useState<podcast| null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export function PodcastProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch(`${API_BASE_URL}/api/story/?number=1`);
         if (res.ok) {
-          const data: legend_general[] | story_general[] = await res.json();
+          const data: podcast[] | podcast[] = await res.json();
           setActivePodcast(data[0]);
         }
       } catch (err) {

@@ -2,14 +2,15 @@
 
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import StoryCard from "@/components/home/podcast-card";
-import { story_general } from "@/types/models/podcast";
+import PodcastCard from "@/components/home/podcast-card";
+import { podcast } from "@/types/models/podcast";
 
-interface StoriesProps {
-    stories: story_general[];
+interface PodcastsProps {
+    podcasts: podcast[];
+    type: string;
 }
 
-const Stories = ({ stories }: StoriesProps) => {
+const Podcasts = ({ podcasts }: PodcastsProps) => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const scroll = (direction: "left" | "right") => {
@@ -24,9 +25,9 @@ const Stories = ({ stories }: StoriesProps) => {
     return (
         <div className="text-white rounded-lg w-full relative flex-1 min-w-0">
             <div className="relative">
-                {stories.length === 0 ? (
-                    <div className="flex items-center justify-center h-full">
-                        <p className="text-neutral-400 text-lg">No stories available</p>
+                {podcasts.length === 0 ? (
+                    <div className="flex items-center justify-center h-46">
+                        <p className="text-neutral-400 text-lg">No podcast available</p>
                     </div>
                 ) : (
                     <>
@@ -34,10 +35,10 @@ const Stories = ({ stories }: StoriesProps) => {
                             ref={scrollRef}
                             className="flex gap-1 h-full overflow-x-auto no-scroll"
                         >
-                            {stories.map((story: story_general) => (
-                                <StoryCard
-                                    key={story.uuid}
-                                    story={story}
+                            {podcasts.map((podcast: podcast) => (
+                                <PodcastCard
+                                    key={podcast.uuid}
+                                    podcast={podcast}
                                 />
                             ))}
                         </div>
@@ -64,4 +65,4 @@ const Stories = ({ stories }: StoriesProps) => {
     );
 };
 
-export default Stories;
+export default Podcasts;

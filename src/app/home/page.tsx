@@ -9,16 +9,22 @@ import StorySpotlight from "@/components/layout/home-spotlight";
 import Csrf from "@/components/backend/csrf";
 import { PodcastProvider } from "@/context/use-podcast";
 import { findBackend } from "@/helper/findBackend";
+import { podcast } from "@/types/models/podcast";
 
 // Fetch API base URL
 const API_BASE_URL = findBackend();
 
-
 export default async function Home() {
+
+  const res = await fetch(`${API_BASE_URL}/api/story/?number=20`);
+
+  const rows: podcast[] = await res.json();
 
   return (
     <SidebarProvider className="h-screen w-full bg-sidebar overflow-hidden p-2" defaultOpen={false}>
+
       <Csrf />
+
       {/* Sidebar */}
       <AppSidebar className="bg-sidebar py-5" />
 
@@ -35,10 +41,13 @@ export default async function Home() {
             <div id="home-main" className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-3">
               {/* Left column */}
               <div className="lg:col-span-2 flex flex-col gap-6 min-w-[300px]">
-                <HomeMain />
+                <HomeMain 
+                  rows={rows}
+                  type="story"
+                />
 
                 <SpotlightSlider />
-                
+
                 <Footer />
               </div>
 
