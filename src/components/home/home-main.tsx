@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Stories from "@/components/home/story-row"
-import { story_general } from "@/types/models/story"
+import { story_general } from "@/types/models/podcast"
 
 function HomeMain() {
     const [open, setOpen] = useState<"All" | "Stories" | "Legends">("All")

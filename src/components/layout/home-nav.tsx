@@ -3,7 +3,7 @@
 import { Home, Search } from "lucide-react"
 import { NotificationsBell } from "./notification-bell"
 import Link from "next/link"
-import { useAuth } from "@/hooks/use-auth"
+import { useAuth } from "@/context/use-auth"
 
 function HomeNav() {
   const { isLoggedIn } = useAuth()
@@ -35,7 +35,7 @@ function HomeNav() {
       <div className="flex items-center mr-10 gap-5">
         {/* Show Sign up only if NOT logged in */}
         {!isLoggedIn && (
-          <div className="flex items-center">
+          <div className="flex items-center gap-5">
             <Link href="/register" passHref>
               <button
                 className="px-4 py-2 rounded-full bg-highlight-light text-black font-medium 
@@ -43,6 +43,15 @@ function HomeNav() {
                  transition transform duration-200 cursor-pointer"
               >
                 Sign up
+              </button>
+            </Link>
+            <Link href="/login" passHref>
+              <button
+                className="px-4 py-2 rounded-full bg-highlight-light text-black font-medium 
+                 hover:opacity-90 hover:scale-105 hover:shadow-lg 
+                 transition transform duration-200 cursor-pointer"
+              >
+                Log In
               </button>
             </Link>
           </div>

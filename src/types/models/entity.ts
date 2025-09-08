@@ -1,5 +1,5 @@
-import { legend_general } from "./legend";
-import { story_general } from "./story";
+import { legend_general } from "./podcast";
+import { story_general } from "./podcast";
 
 export interface entity {
     name: string;

@@ -9,6 +9,7 @@ import {
   Nunito_Sans,
 } from "next/font/google"
 import "./globals.css"
+import { AuthProvider } from "@/context/use-auth"
 
 // Geist Sans
 const geistSans = Geist({
@@ -73,8 +74,10 @@ export default function RootLayout({
           antialiased
         `}
       >
-        {children}
-        <Toaster />
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )

@@ -13,7 +13,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { CommunityHeader } from "./sidebar-community-header"
-import { useAuth } from "@/hooks/use-auth"
+import { useAuth } from "@/context/use-auth"
 
 const communityItems = [
   { title: "Popular Legends", subtitle: "Explore", image: "/icons/popular.png" },
