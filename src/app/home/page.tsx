@@ -20,8 +20,8 @@ export default async function Home() {
     const res = await fetch(`${API_BASE_URL}/api/story/?number=20`);
     rows = await res.json();
 
-  } catch ( error ) {
-    console.error( error );
+  } catch (error) {
+    console.error(error);
   }
 
 
@@ -46,7 +46,7 @@ export default async function Home() {
             <div id="home-main" className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-3">
               {/* Left column */}
               <div className="lg:col-span-2 flex flex-col gap-6 min-w-[300px]">
-                <HomeMain 
+                <HomeMain
                   rows={rows}
                   type="story"
                 />
