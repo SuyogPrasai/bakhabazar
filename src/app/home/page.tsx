@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import Footer from "@/components/layout/footer";
 import HomeMain from "@/components/home/home-main";
