@@ -15,10 +15,15 @@ import { podcast } from "@/types/models/podcast";
 const API_BASE_URL = findBackend();
 
 export default async function Home() {
+  let rows: podcast[] = [];
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/story/?number=20`);
+    rows = await res.json();
 
-  const res = await fetch(`${API_BASE_URL}/api/story/?number=20`);
+  } catch ( error ) {
+    console.error( error );
+  }
 
-  const rows: podcast[] = await res.json();
 
   return (
     <SidebarProvider className="h-screen w-full bg-sidebar overflow-hidden p-2" defaultOpen={false}>
