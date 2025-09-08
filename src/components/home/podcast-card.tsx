@@ -21,7 +21,6 @@ export default function StoryCard({ story }: StoryCardProps) {
     // Update the global active podcast
     setActivePodcast({
       ...story,
-      entities: story.entities || [],
     });
   };
 

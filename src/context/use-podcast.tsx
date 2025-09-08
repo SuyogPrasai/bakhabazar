@@ -23,8 +23,8 @@ export function PodcastProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch(`${API_BASE_URL}/api/story/?number=1`);
         if (res.ok) {
-          const data: legend_general | story_general = await res.json();
-          setActivePodcast(data);
+          const data: legend_general[] | story_general[] = await res.json();
+          setActivePodcast(data[0]);
         }
       } catch (err) {
         console.error("Failed to fetch story:", err);

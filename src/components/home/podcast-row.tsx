@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import StoryCard from "@/components/home/story-card";
-import { story_general } from "@/types/models/story";
+import StoryCard from "@/components/home/podcast-card";
+import { story_general } from "@/types/models/podcast";
 
 interface StoriesProps {
     stories: story_general[];

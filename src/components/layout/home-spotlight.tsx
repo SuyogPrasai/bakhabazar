@@ -12,19 +12,10 @@ const API_BASE_URL = findBackend();
 export default function StorySpotlight() {
   const { activePodcast } = usePodcast();
 
-  if (activePodcast === null) {
-    return (
-      <div className="flex items-center justify-center h-full text-gray-400">
-        {/* Optional: Add a placeholder or loading state */}
-        <p>No podcast selected</p>
-      </div>
-    );
-  }
-
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        key={activePodcast.uuid} // Unique key to trigger animation on change
+        key={activePodcast?.uuid} // Unique key to trigger animation on change
         initial={{ opacity: 0, y: 20 }} // Start state: faded out and slightly offset
         animate={{ opacity: 1, y: 0 }} // End state: fully visible and in place
         exit={{ opacity: 0, y: -20 }} // Exit state: fade out and slide up
@@ -42,11 +33,11 @@ export default function StorySpotlight() {
       >
         {/* Story Section */}
         <div>
-          {activePodcast.picture && (
+          {activePodcast?.picture && (
             <div className="relative w-full h-56 sm:h-72 lg:h-80 xl:h-96">
               <Image
-                src={API_BASE_URL + activePodcast.picture}
-                alt={activePodcast.title}
+                src={API_BASE_URL + activePodcast?.picture}
+                alt={activePodcast?.title}
                 fill
                 className="rounded-lg object-cover"
                 sizes="(max-width: 640px) 100vw, 
@@ -57,21 +48,21 @@ export default function StorySpotlight() {
             </div>
           )}
           <h2 className="text-2xl font-bold mt-4 text-secondary">
-            {activePodcast.title}
+            {activePodcast?.title}
           </h2>
           <p className="text-gray-300 text-base leading-relaxed mt-2">
-            {activePodcast.synopsis}
+            {activePodcast?.synopsis}
           </p>
         </div>
 
         {/* Entities Section (render only if > 0) */}
-        {activePodcast.entities && activePodcast.entities.length > 0 && (
+        {activePodcast?.entities && activePodcast?.entities.length > 0 && (
           <div className="flex-1">
             <h3 className="text-lg font-bold mb-3 text-highlight-light">
               Entities Mentioned
             </h3>
             <div className="flex flex-col gap-4">
-              {activePodcast.entities.map((entity, index) => (
+              {activePodcast?.entities.map((entity, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -10 }} // Start state for each entity

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import Stories from "@/components/home/story-row"
+import Stories from "@/components/home/podcast-row"
 import { story_general } from "@/types/models/podcast"
 
 function HomeMain() {
