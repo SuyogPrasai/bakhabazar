@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import PodcastCard from "@/components/home/podcast-card";
 import { podcast } from "@/types/models/podcast";
@@ -12,6 +12,15 @@ interface PodcastsProps {
 
 const Podcasts = ({ podcasts }: PodcastsProps) => {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [cardHeight, setCardHeight] = useState<string>("11.5rem"); // Fallback height
+
+    useEffect(() => {
+        if (cardRef.current) {
+            const height = cardRef.current.getBoundingClientRect().height;
+            setCardHeight(`${height}px`);
+        }
+    }, [podcasts]);
 
     const scroll = (direction: "left" | "right") => {
         if (!scrollRef.current) return;
@@ -26,20 +35,23 @@ const Podcasts = ({ podcasts }: PodcastsProps) => {
         <div className="text-white rounded-lg w-full relative flex-1 min-w-0">
             <div className="relative">
                 {podcasts.length === 0 ? (
-                    <div className="flex items-center justify-center h-46">
+                    <div
+                        className="flex items-center justify-center p-3"
+                        style={{ minHeight: cardHeight }}
+                    >
                         <p className="text-neutral-400 text-lg">No podcast available</p>
                     </div>
                 ) : (
                     <>
                         <div
                             ref={scrollRef}
-                            className="flex gap-1 h-full overflow-x-auto no-scroll"
+                            className="flex gap-1 overflow-x-auto no-scroll"
+                            style={{ minHeight: cardHeight }}
                         >
-                            {podcasts.map((podcast: podcast) => (
-                                <PodcastCard
-                                    key={podcast.uuid}
-                                    podcast={podcast}
-                                />
+                            {podcasts.map((podcast: podcast, index: number) => (
+                                <div ref={index === 0 ? cardRef : null} key={podcast.uuid}>
+                                    <PodcastCard podcast={podcast} />
+                                </div>
                             ))}
                         </div>
 
