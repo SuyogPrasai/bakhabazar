@@ -58,7 +58,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
-ROOT_URLCONF = 'folk_lore.urls'
+ROOT_URLCONF = 'bakhabazar.urls'
 
 TEMPLATES = [
     {
@@ -143,10 +143,4 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication', 
     ],
-}
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
 }

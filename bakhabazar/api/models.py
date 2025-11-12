@@ -38,15 +38,17 @@ class Story(Hasher, models.Model):
         return self.title
     
     async def asave(self, *args, **kwargs):
-        audio = await tts(str(self.content))
+        audio, srt = await tts(str(self.content))
         await super().asave(*args, **kwargs)
         self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+        self.srt = srt
         return await super().asave()
     
     def save(self, *args, **kwargs):
-        audio = async_to_sync(tts)(str(self.content))
+        audio, srt = async_to_sync(tts)(str(self.content))
         super().save(*args, **kwargs)
         self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+        self.srt = srt
         return super().save(*args, **kwargs)
 
 
@@ -64,15 +66,17 @@ class Legend(Hasher, models.Model):
         return self.title
     
     async def asave(self, *args, **kwargs):
-        audio = await tts(str(self.content))
+        audio, srt = await tts(str(self.content))
         await super().asave(*args, **kwargs)
         self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+        self.srt = srt
         return await super().asave()
     
     def save(self, *args, **kwargs):
-        audio = async_to_sync(tts)(str(self.content))
+        audio, srt = async_to_sync(tts)(str(self.content))
         super().save(*args, **kwargs)
         self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+        self.srt = srt
         return super().save(*args, **kwargs)
     
     
@@ -127,4 +131,4 @@ class Avatar(models.Model):
     dob = models.DateField(null=False, blank=False, default=date.today)
     
     def __str__(self):
-        return self.user.usernameass
+        return self.user.username
