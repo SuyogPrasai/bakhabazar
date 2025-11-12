@@ -54,7 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
 
@@ -76,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = "folk_lore.asgi.application"
+ASGI_APPLICATION = "bakhabazar.asgi.application"
 
 
 # Database
