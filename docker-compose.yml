@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file:
+      - ./backend/postgres_keys.env
+
+  backend:
+    tty: true
+    build: ./bakhabazar
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    depends_on:
+      - db
+    env_file:
+      - ./backend/.env
+    command: ./setup.sh
+    volumes:
+      - media:/Django_Backend/media
+      - static:/Django_Backend/staticfiles
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_BACKEND: http://webserver
+        NEXT_PUBLIC_CLIENT_URL: http://192.168.1.24
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    env_file:
+      - ./bakhabazar/.env
+
+
+  webserver:
+    build: ./nginx/
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+      - backend
+      - frontend
+    volumes:
+      - static:/Django_Backend/staticfiles
+      - media:/Django_Backend/media
+
+
+volumes:
+  db_data:
+  media:
+  static:

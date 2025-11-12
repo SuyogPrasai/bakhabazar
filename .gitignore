@@ -1,0 +1,11 @@
+*__pycache__
+db.sqlite3
+*.env
+*postgres_keys.env
+*.vscode/
+folk
+*media/
+*staticfiles/
+*migrations/
+.DS_Store
+*frontend/
