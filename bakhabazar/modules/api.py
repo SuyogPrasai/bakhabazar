@@ -60,7 +60,7 @@ def chunks(func):
             os.remove(temp_path)
         return file, [list(i) for i in transcription.words]
     return wrapper
-
+"""
 @chunks
 async def tts(text:str, lang:str="en") -> BytesIO:
     url = "https://translate.google.com/translate_tts"
@@ -75,6 +75,33 @@ async def tts(text:str, lang:str="en") -> BytesIO:
             file = BytesIO(await fp.aread())
             
     return file
+"""
+
+async def tts(text:str, lang:str="en") -> BytesIO:
+    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tp:
+        temp_path = tp.name
+    async with client.audio.speech.with_streaming_response.create(
+        model="gpt-4o-mini-tts",
+        voice="coral",
+        input=text,
+        instructions="Speak in a story telling format.",) as response:  
+        await response.stream_to_file(temp_path)
+        print(temp_path)
+    with open(temp_path, "rb") as tp:
+        file = BytesIO(tp.read())
+        tp.seek(0)
+        transcription = await client.audio.transcriptions.create(
+                file=tp,
+                model="whisper-1",
+                response_format="verbose_json",
+                timestamp_granularities=["word"]
+            )
+        file.name = "audio.wav"
+        os.remove(temp_path)
+    return file, [list(i) for i in transcription.words]
+            
+
 
 async def main():
     a = asyncio.create_task(tts(text="""I removed the charger from macbook to hit leg with axe. I am coding very well in laptop even if I can't connect charger. I do not know my apple id password. My friend amogh is very gay. I am writing this code with all programming language"""))

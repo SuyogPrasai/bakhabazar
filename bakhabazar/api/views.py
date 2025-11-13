@@ -1,5 +1,6 @@
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
+from django.core.files.base import ContentFile
 from adrf.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -13,11 +14,15 @@ import random
 import json
 import httpx
 import os
+import base64
+from io import BytesIO
+from openai import AsyncClient
 from dotenv import load_dotenv
 from modules.api import class_login_check
 load_dotenv()
 #MultiPartParsers handles files and images
 #FormParser handles normal forms with text
+MODEL = AsyncClient(api_key=os.getenv("OPENAI_API_KEY"))
 
 @ensure_csrf_cookie
 def csrf_ens(request):
@@ -286,6 +291,19 @@ async def api_logout(request):
 async def ai(request):
     async with httpx.AsyncClient() as client:
         print(os.getenv("N8N_LINK"))
-        res = await client.post(os.getenv("N8N_LINK"), json={"prompt":request.data['prompt']})
-        print(await res.aread())
-        return Response(data=json.loads(await res.aread()), status=200)
+        res = await client.post(os.getenv("N8N_LINK"), json={"prompt":request.data['prompt']}, timeout=5000)
+        output = json.loads(await res.aread())["output"]
+        print(output)
+    dall_res = await MODEL.images.generate(
+        model="gpt-image-1",
+        prompt=output["image_desc"],
+        size="1024x1024"
+    )
+    image_base64 = dall_res.data[0].b64_json
+    
+    image = BytesIO(base64.b64decode(image_base64))
+    ai_gen = Story(title=output["title"], content=output["content"])
+    await ai_gen.asave()
+    ai_gen.picture = ContentFile(image.getvalue(), name=f"{ai_gen.uuid}.wav")
+    await ai_gen.asave()
+    return Response(data=output, status=200)
