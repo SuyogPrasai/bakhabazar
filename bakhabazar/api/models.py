@@ -38,17 +38,19 @@ class Story(Hasher, models.Model):
         return self.title
     
     async def asave(self, *args, **kwargs):
-        audio, srt = await tts(str(self.content))
-        await super().asave(*args, **kwargs)
-        self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
-        self.srt = srt
+        if not self.audio:
+            audio, srt = await tts(str(self.content))
+            await super().asave(*args, **kwargs)
+            self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+            self.srt = srt
         return await super().asave()
     
     def save(self, *args, **kwargs):
-        audio, srt = async_to_sync(tts)(str(self.content))
-        super().save(*args, **kwargs)
-        self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
-        self.srt = srt
+        if not self.audio:
+            audio, srt = async_to_sync(tts)(str(self.content))
+            super().save(*args, **kwargs)
+            self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+            self.srt = srt
         return super().save(*args, **kwargs)
 
 
@@ -66,17 +68,19 @@ class Legend(Hasher, models.Model):
         return self.title
     
     async def asave(self, *args, **kwargs):
-        audio, srt = await tts(str(self.content))
-        await super().asave(*args, **kwargs)
-        self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
-        self.srt = srt
+        if not self.audio:
+            audio, srt = await tts(str(self.content))
+            await super().asave(*args, **kwargs)
+            self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+            self.srt = srt
         return await super().asave()
     
     def save(self, *args, **kwargs):
-        audio, srt = async_to_sync(tts)(str(self.content))
-        super().save(*args, **kwargs)
-        self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
-        self.srt = srt
+        if not self.audio:
+            audio, srt = async_to_sync(tts)(str(self.content))
+            super().save(*args, **kwargs)
+            self.audio = ContentFile(audio.getvalue(), name=f"{self.uuid}.wav")
+            self.srt = srt
         return super().save(*args, **kwargs)
     
     
