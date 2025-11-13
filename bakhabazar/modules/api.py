@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from hashids import Hashids
 from asgiref.sync import sync_to_async 
 from openai import AsyncOpenAI
-import aiohttp
+import httpx
 import asyncio
 from io import BytesIO
 import os
@@ -70,9 +70,18 @@ async def tts(text:str, lang:str="en") -> BytesIO:
         "tl":lang,
         "client":"tw-ob"
     }
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params) as res:
-            fp = await res.read()
-            file = BytesIO(fp)
+    async with httpx.AsyncClient() as model:
+            fp = await model.get(url, params=params) 
+            file = BytesIO(await fp.aread())
             
     return file
+
+async def main():
+    a = asyncio.create_task(tts(text="""I removed the charger from macbook to hit leg with axe. I am coding very well in laptop even if I can't connect charger. I do not know my apple id password. My friend amogh is very gay. I am writing this code with all programming language"""))
+    res, words = await a
+    print(words)
+    with open("name.wav", "wb") as f:
+        f.write(res.read())
+
+if __name__ == "__main__":
+    asyncio.run(main())

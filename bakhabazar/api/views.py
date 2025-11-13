@@ -10,8 +10,12 @@ from .serializers import Register_Serializer
 from django.contrib.auth import authenticate, login, logout
 from asgiref.sync import sync_to_async
 import random
+import json
+import httpx
+import os
+from dotenv import load_dotenv
 from modules.api import class_login_check
-
+load_dotenv()
 #MultiPartParsers handles files and images
 #FormParser handles normal forms with text
 
@@ -67,6 +71,7 @@ async def story(request):
                     "author": storey.author.username,
                     "picture": storey.picture.url if storey.picture else None,
                     "audio": storey.audio.url,
+                    "srt":storey.srt,
                     "uuid": storey.uuid
             }
             return Response(res)
@@ -121,6 +126,7 @@ async def legend(request):
                     } async for i in legen.entities.all()],
                     "picture": legen.picture.url if legen.picture else None,
                     "audio": legen.audio.url,
+                    "srt":legen.srt,
                     "uuid": legen.uuid
             }
             return Response(res)
@@ -275,3 +281,11 @@ class Login(APIView):
 async def api_logout(request):
     await sync_to_async(logout)(request)
     return Response({"ctxt":"logged out successfully"}, status=200)
+
+@api_view(['POST'])
+async def ai(request):
+    async with httpx.AsyncClient() as client:
+        print(os.getenv("N8N_LINK"))
+        res = await client.post(os.getenv("N8N_LINK"), json={"prompt":request.data['prompt']})
+        print(await res.aread())
+        return Response(data=json.loads(await res.aread()), status=200)

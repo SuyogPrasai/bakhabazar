@@ -7,7 +7,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     env_file:
-      - ./backend/postgres_keys.env
+      - ./bakhabazar/postgres_keys.env
 
   backend:
     tty: true
@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ./backend/.env
+      - ./bakhabazar/.env
     command: ./setup.sh
     volumes:
       - media:/Django_Backend/media
@@ -29,7 +29,7 @@ services:
       context: ./frontend
       args:
         NEXT_PUBLIC_BACKEND: http://webserver
-        NEXT_PUBLIC_CLIENT_URL: http://192.168.1.24
+        NEXT_PUBLIC_CLIENT_URL: http://192.168.1.132
     ports:
       - "3000:3000"
     depends_on:
@@ -50,8 +50,21 @@ services:
       - static:/Django_Backend/staticfiles
       - media:/Django_Backend/media
 
+  n8n:
+    image: n8nio/n8n:latest
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+    volumes:
+      - n8n_data:/home/node/.n8n
+
 
 volumes:
   db_data:
   media:
   static:
+  n8n_data:

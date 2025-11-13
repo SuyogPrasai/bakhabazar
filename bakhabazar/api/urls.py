@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import csrf_ens, story, legend, entity, comment, Register, Login, api_logout
+from .views import csrf_ens, story, legend, entity, comment, Register, Login, api_logout, ai
 
 urlpatterns = [
     path('csrf/', csrf_ens, name='csrf_ens'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path("register/", Register.as_view(), name="register"),
     path("login/", Login.as_view(), name="login"),
     path("logout/", api_logout, name="logout"),
+    path('ai/', ai, name='ai')
 ]
