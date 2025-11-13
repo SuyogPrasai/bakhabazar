@@ -290,20 +290,9 @@ async def api_logout(request):
 @api_view(['POST'])
 async def ai(request):
     async with httpx.AsyncClient() as client:
-        print(os.getenv("N8N_LINK"))
         res = await client.post(os.getenv("N8N_LINK"), json={"prompt":request.data['prompt']}, timeout=5000)
         output = json.loads(await res.aread())["output"]
-        print(output)
-    dall_res = await MODEL.images.generate(
-        model="gpt-image-1",
-        prompt=output["image_desc"],
-        size="1024x1024"
-    )
-    image_base64 = dall_res.data[0].b64_json
-    
-    image = BytesIO(base64.b64decode(image_base64))
     ai_gen = Story(title=output["title"], content=output["content"])
     await ai_gen.asave()
-    ai_gen.picture = ContentFile(image.getvalue(), name=f"{ai_gen.uuid}.wav")
-    await ai_gen.asave()
+    output["uuid"] = ai_gen.uuid
     return Response(data=output, status=200)
