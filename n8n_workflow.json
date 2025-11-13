@@ -1,0 +1,343 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4db3c40e-29eb-4171-a056-53b2cfa731a3",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "85b9a793-577a-4178-a7cb-33ad4b20f714",
+      "name": "Webhook",
+      "webhookId": "4db3c40e-29eb-4171-a056-53b2cfa731a3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Parse the following from the input prompt:\n\n- Duration\n- Topic\n- Tone\n- Topic\n- Audience\n\nIf the user does not mention duration, make it 1 minute\n{{ $json.body.prompt }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "0529f698-dccd-425d-b7d0-668643cb39ff",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        208
+      ],
+      "id": "d8ca264a-0d84-4342-9846-4b2a61888d68",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qzrZqXlOdQ2QjFMK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"topic\": \"History of AI safety\",\n  \"tone\": \"educational\",\n  \"duration\": \"10 minutes\",\n  \"audience\": \"tech enthusiasts\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        176
+      ],
+      "id": "dc32e839-e95b-48dc-af49-c25a710ab1a9",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://google.serper.dev/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-KEY",
+              "value": "013eaa4ca55917ab9fbfc384283e089a140f4ce6"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.output.topic }}"
+            },
+            {
+              "name": "location",
+              "value": "Nepal"
+            },
+            {
+              "name": "gl",
+              "value": "np"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        528,
+        -192
+      ],
+      "id": "5c45d353-b670-44d4-a299-01e70fda85b7",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        672,
+        -16
+      ],
+      "id": "4ca034c0-576d-4544-9319-662e43a438da",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "const Details = [];\nlet Output = {};\n\nfor (const item of items) {\n  if (item.json?.searchParameters) {\n    // this is the search result\n    Details.push(...(item.json.organic || []));\n  } else if (item.json?.output) {\n    // this is the output (topic, tone, etc.)\n    Output = item.json.output;\n  }\n}\n\nreturn [\n  {\n    json: {\n      ...Output,\n      search: Details\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        -16
+      ],
+      "id": "72d8d6b0-7d95-4f53-afc9-3feca508338b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=TOPIC: {{ $json.topic }}\n\nTONE: {{ $json.tone }}\n\nDURATION: {{ $json.duration }}\n\nAUDIENCE: {{ $json.audience }}\n\nCONTEXT: {{ $json.search.map(s => s.snippet).join(\"\\n\") }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a creative storyteller and visual concept designer.  \nYour task is to write a captivating short story based on the user’s inputs and return it as valid JSON.\n\n---\n\nUSER INPUTS:\nTOPIC: {{ $json.topic }}\nTONE: {{ $json.tone }}\nDURATION: {{ $json.duration }}\nAUDIENCE: {{ $json.audience }}\n\nSOURCE CONTEXT (optional background info or facts):\n{{ $json.search.map(s => s.snippet).join(\"\\n\") }}\n\n---\n\nGUIDELINES:\n1. Write a complete story with a clear beginning, middle, and end — no podcast format or host dialogue.\n2. Keep the story immersive, emotional, and natural — matching the requested tone, duration, and audience level.\n3. Avoid breaking immersion; do not include instructions, explanations, or meta-commentary.\n4. After the story, generate a one-sentence vivid image description that captures the story’s essence (mood, characters, colors, or atmosphere).\n5. Return only valid JSON in this exact structure:\n\n{\n  \"title\": \"[Short story title, max 40 characters]\",\n  \"content\": \"[Full story text, max 2000 characters]\",\n  \"image_desc\": \"[One-sentence vivid image description]\"\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        -32
+      ],
+      "id": "fa278676-bfe3-48ef-be56-53524eb7abb1",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        896,
+        176
+      ],
+      "id": "ca9a361f-5a06-4a88-b646-7ba7ef15fd2f",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "qzrZqXlOdQ2QjFMK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"title\": \"The Bamboo Grove\",\n\t\"content\": \"The village children used to whisper about the Panda of the Mist — a black-and-white shadow that watched from the forest just beyond the rice paddies. At first, no one believed\",\n  \"image_desc\":\"Gray tabby cat hugging an otter with an orange scarf\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1216,
+        176
+      ],
+      "id": "d8cc547f-e384-4b0d-9b13-c274a3a9c27b",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1328,
+        -16
+      ],
+      "id": "b2daaae5-ad66-4288-b47f-c1675360e547",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "495fcaac-7ebf-4658-806e-40eb9a02bc67",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "274eeb8aa33fc0d807b7ab4f419233077796585116eb8b75091813f90df3d82d"
+  },
+  "id": "tuHl6xnNgmXSdlGS",
+  "tags": []
+}
