@@ -14,8 +14,7 @@ import random
 import json
 import httpx
 import os
-import base64
-from io import BytesIO
+import asyncio
 from openai import AsyncClient
 from dotenv import load_dotenv
 from modules.api import class_login_check
@@ -292,7 +291,10 @@ async def ai(request):
     async with httpx.AsyncClient() as client:
         res = await client.post(os.getenv("N8N_LINK"), json={"prompt":request.data['prompt']}, timeout=5000)
         output = json.loads(await res.aread())["output"]
-    ai_gen = Story(title=output["title"], content=output["content"])
-    await ai_gen.asave()
-    output["uuid"] = ai_gen.uuid
+        
+    async def save_ai():
+        ai_gen = Story(title=output["title"], content=output["content"])
+        ai_gen.author = request.user
+        await ai_gen.asave()
+    asyncio.create_task(save_ai())
     return Response(data=output, status=200)
