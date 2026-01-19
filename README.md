@@ -31,33 +31,31 @@
 
 ## Introduction
 
-**Bakhabazar** is a student-driven information delivery platform developed entirely by the students of Budhanilkantha School (BNKS).  
-Designed to digitalize internal communication within the school and ensure an effective way to deliver essential notices, it serves as the school’s official system for announcements, updates, and articles.
+**Bakhabazar** is a AI powered automated podcast social media system which allows for people to listen/ make create amazing stories with just a click of a button. We feature an amazing frontend UI built in NextJS + OpenAI powered text to speech, and speech to text features integrated into the system.  
 
 <br><br>
 [![Featured Image](github_images/featured_image.png)](https://youtu.be/s3P97ylnI3A)
 <p align="center"><i>Click the image for video of the site</i></p>
 
 # Our Features
-Bakhabazar empowers seamless communication and engagement with a versatile platform designed for schools. From broadcasting targeted announcements to specific groups to publishing polished articles for the entire community, Bakhabazar offers a comprehensive solution for all your communication needs.
-
+Bakhabazar's main goal is to protect and conserve the local stories and legends spoken at streets of Kathmandu, focusing mainly on now forgetting lores and stories from different communities. We collect these stories,and we generate AI powered podcasts to broadcast them to the entire world.
 
 ## Key Functionalities
 
-- **Instant Notice Delivery**  
-  Effortlessly send real-time announcements to the entire school community through a user-friendly input portal.
+- **Human-Like Voice in Podcasts with emotions**  
+  Generate expressive, natural-sounding podcasts using emotionally rich voice synthesis for immersive listening experiences.
 
-- **Targeted Announcements**  
-  Deliver messages to specific grades, clubs, or sections, ensuring relevant communication without unnecessary clutter.
+- **Manual entry of Stories and Legends**  
+  Create, edit, and publish original stories and legends with complete creative control and flexibility.
 
-- **Article Publishing**  
-  Enable students to share well-crafted articles directly on the platform, fostering creativity and community engagement.
+- **Complete Login and SignUp functionality**  
+  Securely register, authenticate, and manage user accounts with reliable and seamless access controls.
 
-- **School-Wide Message Archiving**  
-  Keep all communications organized and accessible with a searchable archive, ensuring no notice is ever lost.
+- **Spotify-like audio control and features**  
+  Enjoy intuitive audio playback with play, pause, seek, skip, and queue management features.
 
-- **School Calendar Integration**  
-  Stay informed with a centralized view of all scheduled events, seamlessly aligned with the school calendar.
+- **Social Media platform for interactivity between useres**  
+  Facilitate user engagement through likes, comments, shares, follows, and interactive content discovery tools.
 
 ## Installation
 
