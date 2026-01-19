@@ -4,7 +4,7 @@
 <div align="center">
 
 [![Donate](https://img.shields.io/badge/_-Donate-red.svg?logo=githubsponsors&labelColor=555555&style=for-the-badge)](Collaborators.md#collaborators "Donate")
-![GitHub License](https://img.shields.io/github/license/suyogprasai/parewa?style=for-the-badge&logoColor=white)
+![GitHub License](https://img.shields.io/github/license/suyogprasai/Bakhabazar?style=for-the-badge&logoColor=white)
 [![Commits](https://img.shields.io/github/commit-activity/m/suyogprasai/bakhabazar?label=commits&style=for-the-badge)](https://github.com/suyogprasai/bakhabazar/commits "Commit History")
 [![Last Commit](https://img.shields.io/github/last-commit/suyogprasai/bakhabazar/main?label=&style=for-the-badge&display_timestamp=committer)](https://github.com/suyogprasai/bakhabazar/pulse/monthly "Last activity")
 </div>
@@ -14,7 +14,7 @@
   src="github_images/logo.jpg" 
   align="center" 
   width="300"
-  alt="Parewa Logo"
+  alt="Bakhabazar Logo"
 />
 </div>
 
@@ -31,15 +31,15 @@
 
 ## Introduction
 
-**Parewa** is a student-driven information delivery platform developed entirely by the students of Budhanilkantha School (BNKS).  
+**Bakhabazar** is a student-driven information delivery platform developed entirely by the students of Budhanilkantha School (BNKS).  
 Designed to digitalize internal communication within the school and ensure an effective way to deliver essential notices, it serves as the school’s official system for announcements, updates, and articles.
 
 <br><br>
-[![Featured Image](github_images/featured_image.png)](https://www.youtube.com/watch?v=1G9VCFo4SHo)
+[![Featured Image](github_images/featured_image.png)](https://youtu.be/s3P97ylnI3A)
 <p align="center"><i>Click the image for video of the site</i></p>
 
 # Our Features
-Parewa empowers seamless communication and engagement with a versatile platform designed for schools. From broadcasting targeted announcements to specific groups to publishing polished articles for the entire community, Parewa offers a comprehensive solution for all your communication needs.
+Bakhabazar empowers seamless communication and engagement with a versatile platform designed for schools. From broadcasting targeted announcements to specific groups to publishing polished articles for the entire community, Bakhabazar offers a comprehensive solution for all your communication needs.
 
 
 ## Key Functionalities
@@ -61,7 +61,7 @@ Parewa empowers seamless communication and engagement with a versatile platform 
 
 ## Installation
 
-To properly install parewa, you need two things for now. First is the wordpress docker image for the backend cms and this repo for hosting the main platform. You may access the docker image and deploy it and connect it to this server.
+To properly install Bakhabazar, you need two things for now. First is the wordpress docker image for the backend cms and this repo for hosting the main platform. You may access the docker image and deploy it and connect it to this server.
 
 The installation procedure for this next js application is simple. You can follow the steps below to run a sample of this code in your machine. 
 <brs>
@@ -71,7 +71,7 @@ The installation procedure for this next js application is simple. You can follo
 
   1. **Clone the Repository**
 ```bash
-git clone https://github.com/suyogprasai/parewa
+git clone https://github.com/suyogprasai/Bakhabazar
 ```
 2. **Install the Required Dependecies**
 ```bash
@@ -87,7 +87,7 @@ You can checkout the scripts on `/scripts` folder on the repository for scripts 
 
 ## Documentation
 
-Parewa is made primarily as a two server system with next js acting as the main frontend for the website with wordpress as the headless cms for content management of the site. This allows us for using proper management and segregation of the data and the system. 
+Bakhabazar is made primarily as a two server system with next js acting as the main frontend for the website with wordpress as the headless cms for content management of the site. This allows us for using proper management and segregation of the data and the system. 
 
 <br/>
 
@@ -123,14 +123,14 @@ Built-in logging via error_log() helps track sync events and quickly identify an
 | 2             | [Classic Editor](https://wordpress.org/plugins/classic-editor/)                  | 1.6.7    | WordPress Contributors |
 | 3             | [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/)         | 7.81     | ServMask              |
 | 4             | [Members](https://wordpress.org/plugins/members/)                         | 3.2.18   | MemberPress           | https://wordpress.org/plugins/members/ |
-| 5             | [Post and User Sync Plugin](https://github.com/SuyogPrasai/parewa_cms/releases/tag/parewa)       | 1.6.3     | Suyog Prasai          |parewa |
+| 5             | [Post and User Sync Plugin](https://github.com/SuyogPrasai/Bakhabazar_cms/releases/tag/Bakhabazar)       | 1.6.3     | Suyog Prasai          |Bakhabazar |
 | 6             | [Ultimate Dashboard](https://wordpress.org/plugins/ultimate-dashboard/)              | 3.8.9    | David Vongries        |
 | 7             | [White Label](https://wordpress.org/plugins/white-label/)                     | 3.2.1    | WPManageNinja         |
 | 8             | [Widget Disable](https://wordpress.org/plugins/widget-disable/)                  | 2.0.1    | WpDevArt              | 
 | 9             | [WP Custom Admin Interface](https://wordpress.org/plugins/wp-custom-admin-interface/)       | 7.9      | Martin Gibson         |
 
 ## Usage Tutorials
-If you have any concerns exploring the full-scale usage of Parewa, please kindly refer to our [YouTube page](https://www.youtube.com/@parewa_bnks) here. 
+If you have any concerns exploring the full-scale usage of Bakhabazar, please kindly refer to our [YouTube page](https://www.youtube.com/@Bakhabazar_bnks) here. 
 It consits of videos on how to use the entire website to the fullest. 
 
 
@@ -140,24 +140,24 @@ It consits of videos on how to use the entire website to the fullest.
 
 
 > [!IMPORTANT]
-> Whether you have feedback on features, have encountered any bugs, or have suggestions for enhancements, we're eager to hear from you. Your insights help us make the PAREWA more robust and user-friendly.
+> Whether you have feedback on features, have encountered any bugs, or have suggestions for enhancements, we're eager to hear from you. Your insights help us make the Bakhabazar more robust and user-friendly.
 
 
 ## Common FAQ's
 
-- **Does Parewa require the user to sign in?** 
+- **Does Bakhabazar require the user to sign in?** 
 Signing in is really optional and its upto you! You won't need an account to view the general notices, but you will need to sign in (with a bnks domain id) specifically if you want to carry out actiivies like voting and polling.
 
-- **Can Parewa be accessed within school only?**
-Well yes, Parewa's website can only be accessed within school's intranet. However, if you are out of the boundries of school, you can subscribe to the newsletter on our website, which delivers the notices to you, no matter where you are in the world. 
+- **Can Bakhabazar be accessed within school only?**
+Well yes, Bakhabazar's website can only be accessed within school's intranet. However, if you are out of the boundries of school, you can subscribe to the newsletter on our website, which delivers the notices to you, no matter where you are in the world. 
 
 
-- **Can Parewa be accessed without a working internet conncetion?**
-Absolutely, since parewa's server is hosted in the school's intranet, within the confines of school you could access it even when there is no working internet connection. Note however, that you still need to be connected to the internet even though is is not working.
+- **Can Bakhabazar be accessed without a working internet conncetion?**
+Absolutely, since Bakhabazar's server is hosted in the school's intranet, within the confines of school you could access it even when there is no working internet connection. Note however, that you still need to be connected to the internet even though is is not working.
 
 **If you encounter and come across any sorts of issues be sure to contact us at:**
 ```bash
-bnks.parewa.moderator@gmail.com
+bnks.Bakhabazar.moderator@gmail.com
 ```
 
 ## Contribution
