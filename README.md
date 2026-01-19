@@ -59,17 +59,19 @@ Bakhabazar's main goal is to protect and conserve the local stories and legends 
 
 ## Installation
 
-To properly install Bakhabazar, you need two things for now. First is the wordpress docker image for the backend cms and this repo for hosting the main platform. You may access the docker image and deploy it and connect it to this server.
+To properly install Bakhabazar, you first need to download this repo in your computer, and also have npm installed. After doing that you need to clone the frontend repo using the script `./frontend.sh`. 
+
+After which you need to add all the nescessary environemnt variables for the frontend and backend. And finally you need to setup n8n backend along with openAI api keys, and then do `docker compose up -d`
 
 The installation procedure for this next js application is simple. You can follow the steps below to run a sample of this code in your machine. 
 <brs>
 > **Prerequesites**
-> You need to make sure that you have node and npm installed in your local machine for running this, also make sure to have docker and python installation for running other componemts
+> You need to make sure that you have node and npm installed in your local machine for running this, also make sure to have docker installed for running other componemts
 
 
   1. **Clone the Repository**
 ```bash
-git clone https://github.com/suyogprasai/Bakhabazar
+git clone https://github.com/suyogprasai/bakhabazar
 ```
 2. **Install the Required Dependecies**
 ```bash
@@ -80,7 +82,23 @@ npm install
 npm run dev
 ```
 
-You can checkout the scripts on `/scripts` folder on the repository for scripts relating to populating the database using random testing data.
+There are five things of which you need to be careful about during this installation. First, the two .env files for the Backend. Then the .env file for the frontend. And Finally, the docker_compose.yml and n8n configuration files. Each one of these components must be carefully considered, or you will likely run into an error.
+
+
+Here is an example for how the .envs and other files are structured
+```
+.
+├── bakhabazar/
+│   ├── postgres_keys.env
+│   ├── .env
+│   └── ...other files
+├── frontend/
+│   └── .env
+├── docker-compose.yml
+└── n8n_config.json
+```
+
+For Development of frontend you need to turn off the frontend from the docker compose and run the fontend through npm directly. Also, make sure to access it with the webserver ( you may need to modify the docker compose ). We ran into a ton of errors for this one.
 
 
 ## Documentation
