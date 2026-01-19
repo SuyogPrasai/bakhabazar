@@ -25,8 +25,6 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Documentation](#documentation)
-- [Tutorials](#usage-tutorials)
-- [FAQ's](#common-faqs)
 - [Contribution](#contribution)
 
 ## Introduction
@@ -113,19 +111,6 @@ Bakhabazar is made primarily as a two server system with next js acting as the m
 
 > [!IMPORTANT]
 > Whether you have feedback on features, have encountered any bugs, or have suggestions for enhancements, we're eager to hear from you. Your insights help us make the Bakhabazar more robust and user-friendly.
-
-
-## Common FAQ's
-
-- **Does Bakhabazar require the user to sign in?** 
-Signing in is really optional and its upto you! You won't need an account to view the general notices, but you will need to sign in (with a bnks domain id) specifically if you want to carry out actiivies like voting and polling.
-
-- **Can Bakhabazar be accessed within school only?**
-Well yes, Bakhabazar's website can only be accessed within school's intranet. However, if you are out of the boundries of school, you can subscribe to the newsletter on our website, which delivers the notices to you, no matter where you are in the world. 
-
-
-- **Can Bakhabazar be accessed without a working internet conncetion?**
-Absolutely, since Bakhabazar's server is hosted in the school's intranet, within the confines of school you could access it even when there is no working internet connection. Note however, that you still need to be connected to the internet even though is is not working.
 
 
 ## Contribution
